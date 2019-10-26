@@ -14,7 +14,7 @@ import java.util.List;
  */
 class SemValue {
     enum Kind {
-        TOKEN, CLASS, CLASS_LIST, FIELD, FIELD_LIST, VAR, VAR_LIST, TYPE, STMT, STMT_LIST, BLOCK, EXPR, EXPR_LIST,
+        TOKEN, CLASS, CLASS_LIST, FIELD, FIELD_LIST, VAR, VAR_LIST, TYPE, TYPE_LIST, STMT, STMT_LIST, BLOCK, EXPR, EXPR_LIST,
         LVALUE, ID, TEMPORARY
     }
 
@@ -82,6 +82,7 @@ class SemValue {
     List<Tree.LocalVarDef> varList; // a list can only contain local vars
 
     Tree.TypeLit type;
+    List<Tree.TypeLit> typeList;
 
     Tree.Stmt stmt;
     List<Tree.Stmt> stmtList;
@@ -130,6 +131,7 @@ class SemValue {
                 case Tokens.LESS_EQUAL -> "operator : <=";
                 case Tokens.NOT_EQUAL -> "operator : !=";
                 case Tokens.OR -> "operator : ||";
+                case Tokens.ABSTRACT -> "keyword : abstract";
                 default -> "operator : " + (char) code;
             };
             case CLASS -> "CLASS: " + clazz;
@@ -139,6 +141,7 @@ class SemValue {
             case VAR -> "VAR: " + type + " " + id;
             case VAR_LIST -> "VAR_LIST: " + varList;
             case TYPE -> "TYPE: " + type;
+            case TYPE_LIST -> "TYPE_LIST: " + typeList;
             case STMT -> "STMT: " + stmt;
             case STMT_LIST -> "STMT_LIST: " + stmtList;
             case BLOCK -> "BLOCK: " + block;
@@ -164,8 +167,35 @@ class SemValue {
      */
     private void UserAction(SemValue $$,
                             SemValue $1, SemValue $2, SemValue $3, SemValue $4, SemValue $5, SemValue $6) {
-        {
+        
             // Your action
-        }
+            // ClassDef :  CLASS Id ExtendsClause '{' FieldList '}'
+            // {
+            //     $$ = svClass(new ClassDef(false, $2.id, Optional.ofNullable($3.id), $5.fieldList, $1.pos));
+            // }
+            // |
+            // ABSTRACT CLASS Id ExtendsClause '{' FieldList '}'
+            // {
+            //     $$ = svClass(new ClassDef(true, $3.id, Optional.ofNullable($4.id), $6.fieldList, $1.pos));
+            // }
+            // ;
+
+            // MethodDef       :   STATIC Type Id '(' VarList ')' Block
+            //         {
+            //             $$ = svField(new MethodDef(true, $3.id, $2.type, $5.varList, $7.block, $3.pos));
+            //         }
+            //     |   Type Id '(' VarList ')' Block
+            //         {
+            //             $$ = svField(new MethodDef(false, $2.id, $1.type, $4.varList, $6.block, $2.pos));
+            //         }
+            //     |   ABSTRACT Type Id '(' VarList ')' ';'
+            //         {
+            //             $$ = svField(new MethodDef(true, $3.id, $2.type, $5.varList, $7.block, $3.pos));
+            //         }
+                
+            //         ;
+
+
+        
     }
 }

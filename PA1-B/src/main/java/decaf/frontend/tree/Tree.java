@@ -61,15 +61,18 @@ public abstract class Tree {
         public final Id id;
         public Optional<Id> parent;
         public final List<Field> fields;
+        public Modifiers modifiers;
         // For convenience
         public final String name;
 
-        public ClassDef(Id id, Optional<Id> parent, List<Field> fields, Pos pos) {
+        public ClassDef(boolean isAbstract, Id id, Optional<Id> parent, List<Field> fields, Pos pos) {
             super(Kind.CLASS_DEF, "ClassDef", pos);
             this.id = id;
             this.parent = parent;
             this.fields = fields;
             this.name = id.name;
+            this.modifiers = isAbstract ? new Modifiers(Modifiers.ABSTRACT, pos) : new Modifiers();
+        
         }
 
         public boolean hasParent() {
@@ -89,16 +92,17 @@ public abstract class Tree {
         @Override
         public Object treeElementAt(int index) {
             return switch (index) {
-                case 0 -> id;
-                case 1 -> parent;
-                case 2 -> fields;
+                case 0 -> modifiers;
+                case 1 -> id;
+                case 2 -> parent;
+                case 3 -> fields;
                 default -> throw new IndexOutOfBoundsException(index);
             };
         }
 
         @Override
         public int treeArity() {
-            return 3;
+            return 4;
         }
 
         @Override
@@ -173,13 +177,13 @@ public abstract class Tree {
         public Id id;
         public TypeLit returnType;
         public List<LocalVarDef> params;
-        public Block body;
+        public Optional<Block> body;
         // For convenience
         public String name;
 
-        public MethodDef(boolean isStatic, Id id, TypeLit returnType, List<LocalVarDef> params, Block body, Pos pos) {
+        public MethodDef(boolean isStatic, boolean isAbstract, Id id, TypeLit returnType, List<LocalVarDef> params, Optional<Block> body, Pos pos) {
             super(Kind.METHOD_DEF, "MethodDef", pos);
-            this.modifiers = isStatic ? new Modifiers(Modifiers.STATIC, pos) : new Modifiers();
+            this.modifiers = isStatic ? new Modifiers(Modifiers.STATIC, pos) : (isAbstract ? new Modifiers(Modifiers.ABSTRACT, pos) : new Modifiers());
             this.id = id;
             this.returnType = returnType;
             this.params = params;
@@ -189,6 +193,10 @@ public abstract class Tree {
 
         public boolean isStatic() {
             return modifiers.isStatic();
+        }
+
+        public boolean isAbstract() {
+            return modifiers.isAbstract();
         }
 
         @Override
@@ -1521,12 +1529,14 @@ public abstract class Tree {
 
         // Available modifiers:
         public static final int STATIC = 1;
+        public static final int ABSTRACT = 2;
 
         public Modifiers(int code, Pos pos) {
             this.code = code;
             this.pos = pos;
             flags = new ArrayList<>();
             if (isStatic()) flags.add("STATIC");
+            if (isAbstract()) flags.add("ABSTRACT");
         }
 
         public Modifiers() {
@@ -1534,7 +1544,11 @@ public abstract class Tree {
         }
 
         public boolean isStatic() {
-            return (code & 1) == 1;
+            return (code == 1);
+        }
+
+        public boolean isAbstract() {
+            return (code == 2);
         }
 
         @Override
