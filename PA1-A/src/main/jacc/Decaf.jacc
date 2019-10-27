@@ -279,7 +279,7 @@ SimpleStmt      :   Var Initializer
                     }
                 |   VAR Id '=' Expr
                     {
-                        $$ = svStmt(new LocalVarDef(Optional.empty(), $2.id, $2.pos, Optional.ofNullable($4.expr), $2.pos));
+                        $$ = svStmt(new LocalVarDef(Optional.empty(), $2.id, $3.pos, Optional.ofNullable($4.expr), $2.pos));
                     }
                 ;
 

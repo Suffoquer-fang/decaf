@@ -1,7 +1,7 @@
 /* This is auto-generated source by LL1-Parser-Gen.
  * Specification file: D:\Workspace\decaf-github\PA1-B\src\main\ll1pg\Decaf.spec
  * Options: unstrict mode
- * Generated at: Sun Oct 27 17:25:03 CST 2019
+ * Generated at: Sun Oct 27 21:44:52 CST 2019
  * Please do NOT modify it!
  *
  * Project repository: https://github.com/paulzfm/LL1-Parser-Gen
@@ -58,20 +58,20 @@ public abstract class LLTable extends AbstractParser
     public static final int Op6 = 291;
     public static final int ExprT5 = 292;
     public static final int TypeList = 293;
-    public static final int Expr8 = 294;
-    public static final int Op4 = 295;
-    public static final int Expr2 = 296;
-    public static final int TopLevel = 297;
-    public static final int Op3 = 298;
-    public static final int VarList = 299;
-    public static final int Expr6 = 300;
-    public static final int ExprT2 = 301;
-    public static final int StmtList = 302;
-    public static final int Expr9 = 303;
-    public static final int Expr1 = 304;
-    public static final int AfterLParen = 305;
-    public static final int ExprListOpt = 306;
-    public static final int AfterRBrack = 307;
+    public static final int AfterRParen = 294;
+    public static final int Expr8 = 295;
+    public static final int Op4 = 296;
+    public static final int Expr2 = 297;
+    public static final int TopLevel = 298;
+    public static final int Op3 = 299;
+    public static final int VarList = 300;
+    public static final int Expr6 = 301;
+    public static final int ExprT2 = 302;
+    public static final int StmtList = 303;
+    public static final int Expr9 = 304;
+    public static final int Expr1 = 305;
+    public static final int AfterLParen = 306;
+    public static final int ExprListOpt = 307;
     public static final int ElseClause = 308;
     public static final int FieldList = 309;
     public static final int Initializer = 310;
@@ -97,17 +97,18 @@ public abstract class LLTable extends AbstractParser
     public static final int SimpleStmt = 330;
     public static final int Block = 331;
     public static final int ExprT1 = 332;
-    public static final int Expr4 = 333;
-    public static final int ExprT4 = 334;
-    public static final int AfterLBrack = 335;
-    public static final int ExprT6 = 336;
-    public static final int Op1 = 337;
-    public static final int ExprT8 = 338;
-    public static final int ExprList1 = 339;
-    public static final int Op5 = 340;
-    public static final int Expr7 = 341;
-    public static final int ClassList = 342;
-    public static final int Var = 343;
+    public static final int TypeList1 = 333;
+    public static final int Expr4 = 334;
+    public static final int ExprT4 = 335;
+    public static final int AfterLBrack = 336;
+    public static final int ExprT6 = 337;
+    public static final int Op1 = 338;
+    public static final int ExprT8 = 339;
+    public static final int ExprList1 = 340;
+    public static final int Op5 = 341;
+    public static final int Expr7 = 342;
+    public static final int ClassList = 343;
+    public static final int Var = 344;
     
     /* start symbol */
     public final int start = TopLevel;
@@ -131,17 +132,17 @@ public abstract class LLTable extends AbstractParser
         "STRING_LIT", "IDENTIFIER", "AND", "OR", "STATIC",
         "INSTANCE_OF", "LESS_EQUAL", "GREATER_EQUAL", "EQUAL", "NOT_EQUAL",
         "ABSTRACT", "VAR", "FUN", "ARROW", "Op6",
-        "ExprT5", "TypeList", "Expr8", "Op4", "Expr2",
-        "TopLevel", "Op3", "VarList", "Expr6", "ExprT2",
-        "StmtList", "Expr9", "Expr1", "AfterLParen", "ExprListOpt",
-        "AfterRBrack", "ElseClause", "FieldList", "Initializer", "ClassDef",
+        "ExprT5", "TypeList", "AfterRParen", "Expr8", "Op4",
+        "Expr2", "TopLevel", "Op3", "VarList", "Expr6",
+        "ExprT2", "StmtList", "Expr9", "Expr1", "AfterLParen",
+        "ExprListOpt", "ElseClause", "FieldList", "Initializer", "ClassDef",
         "ExprList", "Op7", "Literal", "Op2", "Expr",
         "Id", "Type", "Expr5", "AfterNewExpr", "AtomType",
         "ExtendsClause", "ArrayType", "ExprOpt", "Expr3", "AfterIdField",
         "VarList1", "ExprT3", "Stmt", "SimpleStmt", "Block",
-        "ExprT1", "Expr4", "ExprT4", "AfterLBrack", "ExprT6",
-        "Op1", "ExprT8", "ExprList1", "Op5", "Expr7",
-        "ClassList", "Var",
+        "ExprT1", "TypeList1", "Expr4", "ExprT4", "AfterLBrack",
+        "ExprT6", "Op1", "ExprT8", "ExprList1", "Op5",
+        "Expr7", "ClassList", "Var",
     };
     
     /**
@@ -165,6 +166,7 @@ public abstract class LLTable extends AbstractParser
         {Integer.valueOf('*'), Integer.valueOf('/'), Integer.valueOf('%')},
         {Integer.valueOf('+'), Integer.valueOf('-'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, AND, Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('>')},
         {VOID, CLASS, INT, STRING, BOOL, Integer.valueOf(')')},
+        {ARROW, Integer.valueOf('{')},
         {READ_LINE, NULL, INT_LIT, IDENTIFIER, NEW, STRING_LIT, THIS, BOOL_LIT, INSTANCE_OF, READ_INTEGER},
         {LESS_EQUAL, GREATER_EQUAL, Integer.valueOf('<'), Integer.valueOf('>')},
         {Integer.valueOf('!'), Integer.valueOf('-'), READ_LINE, NULL, INT_LIT, IDENTIFIER, NEW, STRING_LIT, THIS, BOOL_LIT, Integer.valueOf('('), INSTANCE_OF, READ_INTEGER},
@@ -178,7 +180,6 @@ public abstract class LLTable extends AbstractParser
         {Integer.valueOf('!'), Integer.valueOf('-'), READ_LINE, NULL, INT_LIT, IDENTIFIER, NEW, STRING_LIT, THIS, BOOL_LIT, Integer.valueOf('('), INSTANCE_OF, READ_INTEGER},
         {CLASS, Integer.valueOf('!'), FUN, Integer.valueOf('-'), READ_LINE, NULL, INT_LIT, IDENTIFIER, NEW, STRING_LIT, THIS, BOOL_LIT, Integer.valueOf('('), INSTANCE_OF, READ_INTEGER},
         {Integer.valueOf('('), Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('.'), Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('['), Integer.valueOf('>'), Integer.valueOf('%')},
-        {ARROW, Integer.valueOf('{')},
         {ELSE, PRINT, VOID, FOR, Integer.valueOf('!'), FUN, Integer.valueOf('-'), CLASS, READ_LINE, WHILE, RETURN, NULL, INT, INT_LIT, Integer.valueOf('}'), IDENTIFIER, NEW, STRING_LIT, IF, VAR, THIS, STRING, BOOL_LIT, Integer.valueOf('('), Integer.valueOf(';'), INSTANCE_OF, BOOL, BREAK, READ_INTEGER, Integer.valueOf('{')},
         {STATIC, ABSTRACT, VOID, CLASS, INT, STRING, BOOL, Integer.valueOf('}')},
         {Integer.valueOf('='), Integer.valueOf(';'), Integer.valueOf(')')},
@@ -194,7 +195,7 @@ public abstract class LLTable extends AbstractParser
         {IDENTIFIER, VOID, CLASS, INT, STRING, BOOL},
         {INT, BOOL, STRING, VOID, CLASS},
         {EXTENDS, Integer.valueOf('{')},
-        {Integer.valueOf('['), Integer.valueOf('('), VOID, CLASS, Integer.valueOf(')'), INT, IDENTIFIER, STRING, BOOL},
+        {Integer.valueOf('['), Integer.valueOf('('), Integer.valueOf(','), IDENTIFIER, Integer.valueOf(')')},
         {Integer.valueOf('!'), FUN, Integer.valueOf('-'), READ_LINE, NULL, INT_LIT, IDENTIFIER, NEW, STRING_LIT, THIS, BOOL_LIT, Integer.valueOf('('), INSTANCE_OF, READ_INTEGER, Integer.valueOf(';')},
         {Integer.valueOf('!'), Integer.valueOf('-'), READ_LINE, NULL, INT_LIT, IDENTIFIER, NEW, STRING_LIT, THIS, BOOL_LIT, Integer.valueOf('('), INSTANCE_OF, READ_INTEGER},
         {Integer.valueOf(';'), Integer.valueOf('(')},
@@ -204,12 +205,13 @@ public abstract class LLTable extends AbstractParser
         {VOID, CLASS, INT, STRING, BOOL, Integer.valueOf('!'), FUN, Integer.valueOf('-'), READ_LINE, NULL, INT_LIT, IDENTIFIER, NEW, STRING_LIT, THIS, BOOL_LIT, Integer.valueOf('('), INSTANCE_OF, READ_INTEGER, Integer.valueOf(';'), Integer.valueOf(')'), VAR},
         {Integer.valueOf('{')},
         {OR, Integer.valueOf(']'), Integer.valueOf(')'), Integer.valueOf(','), Integer.valueOf('='), Integer.valueOf(';')},
+        {Integer.valueOf(','), Integer.valueOf(')')},
         {Integer.valueOf('!'), Integer.valueOf('-'), READ_LINE, NULL, INT_LIT, IDENTIFIER, NEW, STRING_LIT, THIS, BOOL_LIT, Integer.valueOf('('), INSTANCE_OF, READ_INTEGER},
         {LESS_EQUAL, GREATER_EQUAL, Integer.valueOf('<'), Integer.valueOf('>'), Integer.valueOf(']'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, AND, Integer.valueOf(';')},
         {Integer.valueOf(']'), Integer.valueOf('!'), FUN, Integer.valueOf('-'), READ_LINE, NULL, INT_LIT, IDENTIFIER, NEW, STRING_LIT, THIS, BOOL_LIT, Integer.valueOf('('), INSTANCE_OF, READ_INTEGER},
         {Integer.valueOf('*'), Integer.valueOf('/'), Integer.valueOf('%'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('>')},
         {OR},
-        {Integer.valueOf('['), Integer.valueOf('.'), Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('>'), Integer.valueOf('%')},
+        {Integer.valueOf('['), Integer.valueOf('.'), Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('>'), Integer.valueOf('%'), Integer.valueOf('(')},
         {Integer.valueOf(','), Integer.valueOf(')')},
         {Integer.valueOf('+'), Integer.valueOf('-')},
         {Integer.valueOf('-'), Integer.valueOf('!'), Integer.valueOf('('), READ_LINE, NULL, INT_LIT, IDENTIFIER, NEW, STRING_LIT, THIS, BOOL_LIT, INSTANCE_OF, READ_INTEGER},
@@ -234,6 +236,7 @@ public abstract class LLTable extends AbstractParser
         {Integer.valueOf('!'), Integer.valueOf('-'), READ_LINE, NULL, INT_LIT, IDENTIFIER, NEW, STRING_LIT, THIS, BOOL_LIT, Integer.valueOf('('), INSTANCE_OF, READ_INTEGER},
         {LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, AND, Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('>')},
         {Integer.valueOf(')')},
+        {Integer.valueOf(']'), Integer.valueOf(')'), Integer.valueOf(','), Integer.valueOf('='), Integer.valueOf(';')},
         {Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('>'), Integer.valueOf('%')},
         {Integer.valueOf('!'), Integer.valueOf('-'), READ_LINE, NULL, INT_LIT, IDENTIFIER, NEW, STRING_LIT, THIS, BOOL_LIT, Integer.valueOf('('), INSTANCE_OF, READ_INTEGER},
         {Integer.valueOf(']'), Integer.valueOf(')'), Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf(';')},
@@ -243,27 +246,26 @@ public abstract class LLTable extends AbstractParser
         {LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('>')},
         {Integer.valueOf(']'), Integer.valueOf(')'), Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf(';')},
         {Integer.valueOf('}')},
-        {Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('.'), Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('['), Integer.valueOf('>'), Integer.valueOf('%')},
+        {Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('.'), Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf('('), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('['), Integer.valueOf('>'), Integer.valueOf('%')},
         {Integer.valueOf(']'), Integer.valueOf(')'), Integer.valueOf(','), Integer.valueOf('='), Integer.valueOf(';')},
         {Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('>'), Integer.valueOf('%')},
-        {Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('.'), Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('['), Integer.valueOf('>'), Integer.valueOf('%')},
-        {Integer.valueOf(']'), Integer.valueOf(')'), Integer.valueOf(','), Integer.valueOf('='), Integer.valueOf(';')},
+        {Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('.'), Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf('('), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('['), Integer.valueOf('>'), Integer.valueOf('%')},
         {PRINT, VOID, FOR, Integer.valueOf('!'), FUN, Integer.valueOf('-'), CLASS, READ_LINE, WHILE, RETURN, NULL, INT, INT_LIT, Integer.valueOf('}'), IDENTIFIER, NEW, STRING_LIT, IF, VAR, THIS, STRING, BOOL_LIT, ELSE, Integer.valueOf('('), Integer.valueOf(';'), INSTANCE_OF, BOOL, BREAK, READ_INTEGER, Integer.valueOf('{')},
         {Integer.valueOf('}')},
         {Integer.valueOf(';'), Integer.valueOf(')')},
         {CLASS, ABSTRACT, eof, eos},
         {Integer.valueOf(')')},
         {Integer.valueOf('!'), Integer.valueOf('-'), READ_LINE, NULL, INT_LIT, IDENTIFIER, NEW, STRING_LIT, THIS, BOOL_LIT, Integer.valueOf('('), INSTANCE_OF, READ_INTEGER},
-        {Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('.'), Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('['), Integer.valueOf('>'), Integer.valueOf('%')},
+        {Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('.'), Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf('('), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('['), Integer.valueOf('>'), Integer.valueOf('%')},
         {Integer.valueOf('!'), Integer.valueOf('-'), READ_LINE, NULL, INT_LIT, IDENTIFIER, NEW, STRING_LIT, THIS, BOOL_LIT, Integer.valueOf('('), INSTANCE_OF, READ_INTEGER},
         {Integer.valueOf(']'), Integer.valueOf(')'), Integer.valueOf(','), Integer.valueOf('='), Integer.valueOf(';')},
-        {Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), VOID, GREATER_EQUAL, EXTENDS, Integer.valueOf('.'), Integer.valueOf('-'), CLASS, EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), INT, OR, IDENTIFIER, Integer.valueOf('+'), AND, Integer.valueOf('*'), STRING, Integer.valueOf('('), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('['), BOOL, Integer.valueOf('>'), Integer.valueOf('%'), Integer.valueOf('{')},
-        {VOID, CLASS, Integer.valueOf(')'), INT, IDENTIFIER, STRING, BOOL},
+        {Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, EXTENDS, Integer.valueOf('.'), Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, IDENTIFIER, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf('('), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('['), Integer.valueOf('>'), Integer.valueOf('%'), Integer.valueOf('{')},
+        {Integer.valueOf(','), IDENTIFIER, Integer.valueOf(')')},
         {LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, AND, Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('>')},
-        {Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('.'), Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('['), Integer.valueOf('>'), Integer.valueOf('%')},
-        {VOID, CLASS, Integer.valueOf(')'), INT, IDENTIFIER, STRING, Integer.valueOf('('), Integer.valueOf('['), BOOL},
+        {Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('.'), Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf('('), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('['), Integer.valueOf('>'), Integer.valueOf('%')},
+        {Integer.valueOf(')'), Integer.valueOf(','), IDENTIFIER, Integer.valueOf('('), Integer.valueOf('[')},
         {Integer.valueOf('{')},
-        {VOID, CLASS, Integer.valueOf(')'), INT, IDENTIFIER, STRING, BOOL},
+        {Integer.valueOf(','), IDENTIFIER, Integer.valueOf(')')},
         {Integer.valueOf(';')},
         {Integer.valueOf(']'), Integer.valueOf(')'), Integer.valueOf(','), Integer.valueOf('='), OR, AND, Integer.valueOf(';')},
         {VOID, CLASS, INT, Integer.valueOf('}'), ABSTRACT, STRING, STATIC, BOOL},
@@ -273,9 +275,10 @@ public abstract class LLTable extends AbstractParser
         {Integer.valueOf(';'), Integer.valueOf(')')},
         {PRINT, Integer.valueOf(']'), VOID, FOR, Integer.valueOf('!'), FUN, Integer.valueOf('-'), CLASS, Integer.valueOf(')'), Integer.valueOf(','), READ_LINE, WHILE, RETURN, Integer.valueOf('='), NULL, INT, INT_LIT, Integer.valueOf('}'), IDENTIFIER, NEW, ABSTRACT, STRING_LIT, IF, VAR, THIS, STRING, BOOL_LIT, STATIC, ELSE, Integer.valueOf('('), Integer.valueOf(';'), INSTANCE_OF, BOOL, BREAK, READ_INTEGER, Integer.valueOf('{')},
         {Integer.valueOf(']'), Integer.valueOf(')'), Integer.valueOf(','), Integer.valueOf('='), Integer.valueOf(';')},
+        {Integer.valueOf(')')},
         {Integer.valueOf(']'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, AND, Integer.valueOf(';')},
         {Integer.valueOf(']'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, AND, Integer.valueOf(';')},
-        {Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('.'), Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('['), Integer.valueOf('>'), Integer.valueOf('%')},
+        {Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('.'), Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf('('), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('['), Integer.valueOf('>'), Integer.valueOf('%')},
         {LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('>')},
         {Integer.valueOf('!'), Integer.valueOf('-'), READ_LINE, NULL, INT_LIT, IDENTIFIER, NEW, STRING_LIT, THIS, BOOL_LIT, Integer.valueOf('('), INSTANCE_OF, READ_INTEGER},
         {Integer.valueOf('/'), LESS_EQUAL, Integer.valueOf(']'), GREATER_EQUAL, Integer.valueOf('-'), EQUAL, Integer.valueOf(')'), NOT_EQUAL, Integer.valueOf(','), Integer.valueOf('='), OR, Integer.valueOf('+'), AND, Integer.valueOf('*'), Integer.valueOf(';'), Integer.valueOf('<'), Integer.valueOf('>'), Integer.valueOf('%')},
@@ -298,7 +301,7 @@ public abstract class LLTable extends AbstractParser
     }
     
     public LLTable() {
-        for (int i = 0; i < 53; i++) {
+        for (int i = 0; i < 54; i++) {
             begin.add(new HashSet<>(Arrays.asList(beginRaw[i])));
             follow.add(new HashSet<>(Arrays.asList(followRaw[i])));
         }
@@ -319,7 +322,7 @@ public abstract class LLTable extends AbstractParser
         
     public Map.Entry<Integer, List<Integer>> query(int nonTerminal, int lookahead) {
         switch (nonTerminal) {
-            //# line 392
+            //# line 403
             case Op6: {
                 switch (lookahead) {
                     case '*':
@@ -331,7 +334,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 551
+            //# line 562
             case ExprT5: {
                 switch (lookahead) {
                     case '+':
@@ -362,13 +365,23 @@ public abstract class LLTable extends AbstractParser
                     case INT:
                     case STRING:
                     case BOOL:
-                        return new AbstractMap.SimpleEntry<>(5, Arrays.asList(Type, TypeList));
+                        return new AbstractMap.SimpleEntry<>(5, Arrays.asList(Type, TypeList1));
                     case ')':
                         return new AbstractMap.SimpleEntry<>(6, Arrays.asList());
                     default: return null;
                 }
             }
-            //# line 625
+            //# line 452
+            case AfterRParen: {
+                switch (lookahead) {
+                    case ARROW:
+                        return new AbstractMap.SimpleEntry<>(7, Arrays.asList(ARROW, Expr));
+                    case '{':
+                        return new AbstractMap.SimpleEntry<>(8, Arrays.asList(Block));
+                    default: return null;
+                }
+            }
+            //# line 636
             case Expr8: {
                 switch (lookahead) {
                     case READ_LINE:
@@ -381,25 +394,25 @@ public abstract class LLTable extends AbstractParser
                     case BOOL_LIT:
                     case INSTANCE_OF:
                     case READ_INTEGER:
-                        return new AbstractMap.SimpleEntry<>(7, Arrays.asList(Expr9, ExprT8));
+                        return new AbstractMap.SimpleEntry<>(9, Arrays.asList(Expr9, ExprT8));
                     default: return null;
                 }
             }
-            //# line 352
+            //# line 363
             case Op4: {
                 switch (lookahead) {
                     case LESS_EQUAL:
-                        return new AbstractMap.SimpleEntry<>(8, Arrays.asList(LESS_EQUAL));
+                        return new AbstractMap.SimpleEntry<>(10, Arrays.asList(LESS_EQUAL));
                     case GREATER_EQUAL:
-                        return new AbstractMap.SimpleEntry<>(9, Arrays.asList(GREATER_EQUAL));
+                        return new AbstractMap.SimpleEntry<>(11, Arrays.asList(GREATER_EQUAL));
                     case '<':
-                        return new AbstractMap.SimpleEntry<>(10, Arrays.asList(Integer.valueOf('<')));
+                        return new AbstractMap.SimpleEntry<>(12, Arrays.asList(Integer.valueOf('<')));
                     case '>':
-                        return new AbstractMap.SimpleEntry<>(11, Arrays.asList(Integer.valueOf('>')));
+                        return new AbstractMap.SimpleEntry<>(13, Arrays.asList(Integer.valueOf('>')));
                     default: return null;
                 }
             }
-            //# line 476
+            //# line 487
             case Expr2: {
                 switch (lookahead) {
                     case '!':
@@ -415,7 +428,7 @@ public abstract class LLTable extends AbstractParser
                     case '(':
                     case INSTANCE_OF:
                     case READ_INTEGER:
-                        return new AbstractMap.SimpleEntry<>(12, Arrays.asList(Expr3, ExprT2));
+                        return new AbstractMap.SimpleEntry<>(14, Arrays.asList(Expr3, ExprT2));
                     default: return null;
                 }
             }
@@ -424,17 +437,17 @@ public abstract class LLTable extends AbstractParser
                 switch (lookahead) {
                     case CLASS:
                     case ABSTRACT:
-                        return new AbstractMap.SimpleEntry<>(13, Arrays.asList(ClassDef, ClassList));
+                        return new AbstractMap.SimpleEntry<>(15, Arrays.asList(ClassDef, ClassList));
                     default: return null;
                 }
             }
-            //# line 338
+            //# line 349
             case Op3: {
                 switch (lookahead) {
                     case EQUAL:
-                        return new AbstractMap.SimpleEntry<>(14, Arrays.asList(EQUAL));
+                        return new AbstractMap.SimpleEntry<>(16, Arrays.asList(EQUAL));
                     case NOT_EQUAL:
-                        return new AbstractMap.SimpleEntry<>(15, Arrays.asList(NOT_EQUAL));
+                        return new AbstractMap.SimpleEntry<>(17, Arrays.asList(NOT_EQUAL));
                     default: return null;
                 }
             }
@@ -446,13 +459,13 @@ public abstract class LLTable extends AbstractParser
                     case INT:
                     case STRING:
                     case BOOL:
-                        return new AbstractMap.SimpleEntry<>(16, Arrays.asList(Var, VarList1));
+                        return new AbstractMap.SimpleEntry<>(18, Arrays.asList(Var, VarList1));
                     case ')':
-                        return new AbstractMap.SimpleEntry<>(17, Arrays.asList());
+                        return new AbstractMap.SimpleEntry<>(19, Arrays.asList());
                     default: return null;
                 }
             }
-            //# line 568
+            //# line 579
             case Expr6: {
                 switch (lookahead) {
                     case '!':
@@ -468,26 +481,26 @@ public abstract class LLTable extends AbstractParser
                     case '(':
                     case INSTANCE_OF:
                     case READ_INTEGER:
-                        return new AbstractMap.SimpleEntry<>(18, Arrays.asList(Expr7, ExprT6));
+                        return new AbstractMap.SimpleEntry<>(20, Arrays.asList(Expr7, ExprT6));
                     default: return null;
                 }
             }
-            //# line 482
+            //# line 493
             case ExprT2: {
                 switch (lookahead) {
                     case AND:
-                        return new AbstractMap.SimpleEntry<>(19, Arrays.asList(Op2, Expr3, ExprT2));
+                        return new AbstractMap.SimpleEntry<>(21, Arrays.asList(Op2, Expr3, ExprT2));
                     case ']':
                     case ')':
                     case ',':
                     case '=':
                     case OR:
                     case ';':
-                        return new AbstractMap.SimpleEntry<>(20, Arrays.asList());
+                        return new AbstractMap.SimpleEntry<>(22, Arrays.asList());
                     default: return null;
                 }
             }
-            //# line 251
+            //# line 262
             case StmtList: {
                 switch (lookahead) {
                     case PRINT:
@@ -518,36 +531,36 @@ public abstract class LLTable extends AbstractParser
                     case BREAK:
                     case READ_INTEGER:
                     case '{':
-                        return new AbstractMap.SimpleEntry<>(21, Arrays.asList(Stmt, StmtList));
+                        return new AbstractMap.SimpleEntry<>(23, Arrays.asList(Stmt, StmtList));
                     case '}':
-                        return new AbstractMap.SimpleEntry<>(22, Arrays.asList());
+                        return new AbstractMap.SimpleEntry<>(24, Arrays.asList());
                     default: return null;
                 }
             }
-            //# line 681
+            //# line 701
             case Expr9: {
                 switch (lookahead) {
                     case INT_LIT:
                     case BOOL_LIT:
                     case STRING_LIT:
                     case NULL:
-                        return new AbstractMap.SimpleEntry<>(23, Arrays.asList(Literal));
+                        return new AbstractMap.SimpleEntry<>(25, Arrays.asList(Literal));
                     case THIS:
-                        return new AbstractMap.SimpleEntry<>(24, Arrays.asList(THIS));
+                        return new AbstractMap.SimpleEntry<>(26, Arrays.asList(THIS));
                     case READ_INTEGER:
-                        return new AbstractMap.SimpleEntry<>(25, Arrays.asList(READ_INTEGER, Integer.valueOf('('), Integer.valueOf(')')));
+                        return new AbstractMap.SimpleEntry<>(27, Arrays.asList(READ_INTEGER, Integer.valueOf('('), Integer.valueOf(')')));
                     case READ_LINE:
-                        return new AbstractMap.SimpleEntry<>(26, Arrays.asList(READ_LINE, Integer.valueOf('('), Integer.valueOf(')')));
+                        return new AbstractMap.SimpleEntry<>(28, Arrays.asList(READ_LINE, Integer.valueOf('('), Integer.valueOf(')')));
                     case INSTANCE_OF:
-                        return new AbstractMap.SimpleEntry<>(27, Arrays.asList(INSTANCE_OF, Integer.valueOf('('), Expr, Integer.valueOf(','), Id, Integer.valueOf(')')));
+                        return new AbstractMap.SimpleEntry<>(29, Arrays.asList(INSTANCE_OF, Integer.valueOf('('), Expr, Integer.valueOf(','), Id, Integer.valueOf(')')));
                     case NEW:
-                        return new AbstractMap.SimpleEntry<>(28, Arrays.asList(NEW, AfterNewExpr));
+                        return new AbstractMap.SimpleEntry<>(30, Arrays.asList(NEW, AfterNewExpr));
                     case IDENTIFIER:
-                        return new AbstractMap.SimpleEntry<>(29, Arrays.asList(Id, ExprListOpt));
+                        return new AbstractMap.SimpleEntry<>(31, Arrays.asList(Id));
                     default: return null;
                 }
             }
-            //# line 453
+            //# line 464
             case Expr1: {
                 switch (lookahead) {
                     case '!':
@@ -563,15 +576,15 @@ public abstract class LLTable extends AbstractParser
                     case '(':
                     case INSTANCE_OF:
                     case READ_INTEGER:
-                        return new AbstractMap.SimpleEntry<>(30, Arrays.asList(Expr2, ExprT1));
+                        return new AbstractMap.SimpleEntry<>(32, Arrays.asList(Expr2, ExprT1));
                     default: return null;
                 }
             }
-            //# line 605
+            //# line 616
             case AfterLParen: {
                 switch (lookahead) {
                     case CLASS:
-                        return new AbstractMap.SimpleEntry<>(31, Arrays.asList(CLASS, Id, Integer.valueOf(')'), Expr7));
+                        return new AbstractMap.SimpleEntry<>(33, Arrays.asList(CLASS, Id, Integer.valueOf(')'), Expr7));
                     case '!':
                     case FUN:
                     case '-':
@@ -586,15 +599,15 @@ public abstract class LLTable extends AbstractParser
                     case '(':
                     case INSTANCE_OF:
                     case READ_INTEGER:
-                        return new AbstractMap.SimpleEntry<>(32, Arrays.asList(Expr, Integer.valueOf(')'), ExprT8));
+                        return new AbstractMap.SimpleEntry<>(34, Arrays.asList(Expr, Integer.valueOf(')'), ExprT8));
                     default: return null;
                 }
             }
-            //# line 670
+            //# line 690
             case ExprListOpt: {
                 switch (lookahead) {
                     case '(':
-                        return new AbstractMap.SimpleEntry<>(33, Arrays.asList(Integer.valueOf('('), ExprList, Integer.valueOf(')')));
+                        return new AbstractMap.SimpleEntry<>(35, Arrays.asList(Integer.valueOf('('), ExprList, Integer.valueOf(')')));
                     case '/':
                     case LESS_EQUAL:
                     case ']':
@@ -615,21 +628,11 @@ public abstract class LLTable extends AbstractParser
                     case '[':
                     case '>':
                     case '%':
-                        return new AbstractMap.SimpleEntry<>(34, Arrays.asList());
+                        return new AbstractMap.SimpleEntry<>(36, Arrays.asList());
                     default: return null;
                 }
             }
-            //# line 441
-            case AfterRBrack: {
-                switch (lookahead) {
-                    case ARROW:
-                        return new AbstractMap.SimpleEntry<>(35, Arrays.asList(ARROW, Expr));
-                    case '{':
-                        return new AbstractMap.SimpleEntry<>(36, Arrays.asList(Block));
-                    default: return null;
-                }
-            }
-            //# line 300
+            //# line 311
             case ElseClause: {
                 switch (lookahead) {
                     case ELSE:
@@ -685,7 +688,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 289
+            //# line 300
             case Initializer: {
                 switch (lookahead) {
                     case '=':
@@ -706,7 +709,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 763
+            //# line 779
             case ExprList: {
                 switch (lookahead) {
                     case '!':
@@ -729,7 +732,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 412
+            //# line 423
             case Op7: {
                 switch (lookahead) {
                     case '-':
@@ -739,7 +742,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 719
+            //# line 735
             case Literal: {
                 switch (lookahead) {
                     case INT_LIT:
@@ -753,7 +756,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 330
+            //# line 341
             case Op2: {
                 switch (lookahead) {
                     case AND:
@@ -761,11 +764,11 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 428
+            //# line 439
             case Expr: {
                 switch (lookahead) {
                     case FUN:
-                        return new AbstractMap.SimpleEntry<>(56, Arrays.asList(FUN, Integer.valueOf('('), VarList, Integer.valueOf(')'), AfterRBrack));
+                        return new AbstractMap.SimpleEntry<>(56, Arrays.asList(FUN, Integer.valueOf('('), VarList, Integer.valueOf(')'), AfterRParen));
                     case '!':
                     case '-':
                     case READ_LINE:
@@ -783,7 +786,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 787
+            //# line 803
             case Id: {
                 switch (lookahead) {
                     case IDENTIFIER:
@@ -803,7 +806,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 545
+            //# line 556
             case Expr5: {
                 switch (lookahead) {
                     case '!':
@@ -823,7 +826,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 737
+            //# line 753
             case AfterNewExpr: {
                 switch (lookahead) {
                     case IDENTIFIER:
@@ -870,18 +873,14 @@ public abstract class LLTable extends AbstractParser
                         return new AbstractMap.SimpleEntry<>(70, Arrays.asList(Integer.valueOf('['), Integer.valueOf(']'), ArrayType));
                     case '(':
                         return new AbstractMap.SimpleEntry<>(71, Arrays.asList(Integer.valueOf('('), TypeList, Integer.valueOf(')'), ArrayType));
-                    case VOID:
-                    case CLASS:
-                    case ')':
-                    case INT:
+                    case ',':
                     case IDENTIFIER:
-                    case STRING:
-                    case BOOL:
+                    case ')':
                         return new AbstractMap.SimpleEntry<>(72, Arrays.asList());
                     default: return null;
                 }
             }
-            //# line 310
+            //# line 321
             case ExprOpt: {
                 switch (lookahead) {
                     case '!':
@@ -904,7 +903,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 499
+            //# line 510
             case Expr3: {
                 switch (lookahead) {
                     case '!':
@@ -944,7 +943,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 505
+            //# line 516
             case ExprT3: {
                 switch (lookahead) {
                     case EQUAL:
@@ -961,7 +960,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 205
+            //# line 216
             case Stmt: {
                 switch (lookahead) {
                     case '{':
@@ -1003,7 +1002,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 262
+            //# line 273
             case SimpleStmt: {
                 switch (lookahead) {
                     case VOID:
@@ -1035,7 +1034,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 245
+            //# line 256
             case Block: {
                 switch (lookahead) {
                     case '{':
@@ -1043,7 +1042,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 459
+            //# line 470
             case ExprT1: {
                 switch (lookahead) {
                     case OR:
@@ -1057,7 +1056,17 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 522
+            //# line 203
+            case TypeList1: {
+                switch (lookahead) {
+                    case ',':
+                        return new AbstractMap.SimpleEntry<>(97, Arrays.asList(Integer.valueOf(','), Type, TypeList1));
+                    case ')':
+                        return new AbstractMap.SimpleEntry<>(98, Arrays.asList());
+                    default: return null;
+                }
+            }
+            //# line 533
             case Expr4: {
                 switch (lookahead) {
                     case '!':
@@ -1073,18 +1082,18 @@ public abstract class LLTable extends AbstractParser
                     case '(':
                     case INSTANCE_OF:
                     case READ_INTEGER:
-                        return new AbstractMap.SimpleEntry<>(97, Arrays.asList(Expr5, ExprT4));
+                        return new AbstractMap.SimpleEntry<>(99, Arrays.asList(Expr5, ExprT4));
                     default: return null;
                 }
             }
-            //# line 528
+            //# line 539
             case ExprT4: {
                 switch (lookahead) {
                     case LESS_EQUAL:
                     case GREATER_EQUAL:
                     case '<':
                     case '>':
-                        return new AbstractMap.SimpleEntry<>(98, Arrays.asList(Op4, Expr5, ExprT4));
+                        return new AbstractMap.SimpleEntry<>(100, Arrays.asList(Op4, Expr5, ExprT4));
                     case ']':
                     case EQUAL:
                     case ')':
@@ -1094,15 +1103,15 @@ public abstract class LLTable extends AbstractParser
                     case OR:
                     case AND:
                     case ';':
-                        return new AbstractMap.SimpleEntry<>(99, Arrays.asList());
+                        return new AbstractMap.SimpleEntry<>(101, Arrays.asList());
                     default: return null;
                 }
             }
-            //# line 751
+            //# line 767
             case AfterLBrack: {
                 switch (lookahead) {
                     case ']':
-                        return new AbstractMap.SimpleEntry<>(100, Arrays.asList(Integer.valueOf(']'), Integer.valueOf('['), AfterLBrack));
+                        return new AbstractMap.SimpleEntry<>(102, Arrays.asList(Integer.valueOf(']'), Integer.valueOf('['), AfterLBrack));
                     case '!':
                     case FUN:
                     case '-':
@@ -1117,17 +1126,17 @@ public abstract class LLTable extends AbstractParser
                     case '(':
                     case INSTANCE_OF:
                     case READ_INTEGER:
-                        return new AbstractMap.SimpleEntry<>(101, Arrays.asList(Expr, Integer.valueOf(']')));
+                        return new AbstractMap.SimpleEntry<>(103, Arrays.asList(Expr, Integer.valueOf(']')));
                     default: return null;
                 }
             }
-            //# line 574
+            //# line 585
             case ExprT6: {
                 switch (lookahead) {
                     case '*':
                     case '/':
                     case '%':
-                        return new AbstractMap.SimpleEntry<>(102, Arrays.asList(Op6, Expr7, ExprT6));
+                        return new AbstractMap.SimpleEntry<>(104, Arrays.asList(Op6, Expr7, ExprT6));
                     case LESS_EQUAL:
                     case ']':
                     case GREATER_EQUAL:
@@ -1143,25 +1152,25 @@ public abstract class LLTable extends AbstractParser
                     case ';':
                     case '<':
                     case '>':
-                        return new AbstractMap.SimpleEntry<>(103, Arrays.asList());
+                        return new AbstractMap.SimpleEntry<>(105, Arrays.asList());
                     default: return null;
                 }
             }
-            //# line 322
+            //# line 333
             case Op1: {
                 switch (lookahead) {
                     case OR:
-                        return new AbstractMap.SimpleEntry<>(104, Arrays.asList(OR));
+                        return new AbstractMap.SimpleEntry<>(106, Arrays.asList(OR));
                     default: return null;
                 }
             }
-            //# line 641
+            //# line 652
             case ExprT8: {
                 switch (lookahead) {
                     case '[':
-                        return new AbstractMap.SimpleEntry<>(105, Arrays.asList(Integer.valueOf('['), Expr, Integer.valueOf(']'), ExprT8));
+                        return new AbstractMap.SimpleEntry<>(107, Arrays.asList(Integer.valueOf('['), Expr, Integer.valueOf(']'), ExprT8));
                     case '.':
-                        return new AbstractMap.SimpleEntry<>(106, Arrays.asList(Integer.valueOf('.'), Id, ExprListOpt, ExprT8));
+                        return new AbstractMap.SimpleEntry<>(108, Arrays.asList(Integer.valueOf('.'), Id, ExprListOpt, ExprT8));
                     case '/':
                     case LESS_EQUAL:
                     case ']':
@@ -1180,38 +1189,40 @@ public abstract class LLTable extends AbstractParser
                     case '<':
                     case '>':
                     case '%':
-                        return new AbstractMap.SimpleEntry<>(107, Arrays.asList());
+                        return new AbstractMap.SimpleEntry<>(109, Arrays.asList());
+                    case '(':
+                        return new AbstractMap.SimpleEntry<>(110, Arrays.asList(Integer.valueOf('('), ExprList, Integer.valueOf(')'), ExprT8));
                     default: return null;
                 }
             }
-            //# line 774
+            //# line 790
             case ExprList1: {
                 switch (lookahead) {
                     case ',':
-                        return new AbstractMap.SimpleEntry<>(108, Arrays.asList(Integer.valueOf(','), Expr, ExprList1));
+                        return new AbstractMap.SimpleEntry<>(111, Arrays.asList(Integer.valueOf(','), Expr, ExprList1));
                     case ')':
-                        return new AbstractMap.SimpleEntry<>(109, Arrays.asList());
+                        return new AbstractMap.SimpleEntry<>(112, Arrays.asList());
                     default: return null;
                 }
             }
-            //# line 378
+            //# line 389
             case Op5: {
                 switch (lookahead) {
                     case '+':
-                        return new AbstractMap.SimpleEntry<>(110, Arrays.asList(Integer.valueOf('+')));
+                        return new AbstractMap.SimpleEntry<>(113, Arrays.asList(Integer.valueOf('+')));
                     case '-':
-                        return new AbstractMap.SimpleEntry<>(111, Arrays.asList(Integer.valueOf('-')));
+                        return new AbstractMap.SimpleEntry<>(114, Arrays.asList(Integer.valueOf('-')));
                     default: return null;
                 }
             }
-            //# line 591
+            //# line 602
             case Expr7: {
                 switch (lookahead) {
                     case '-':
                     case '!':
-                        return new AbstractMap.SimpleEntry<>(112, Arrays.asList(Op7, Expr7));
+                        return new AbstractMap.SimpleEntry<>(115, Arrays.asList(Op7, Expr7));
                     case '(':
-                        return new AbstractMap.SimpleEntry<>(113, Arrays.asList(Integer.valueOf('('), AfterLParen));
+                        return new AbstractMap.SimpleEntry<>(116, Arrays.asList(Integer.valueOf('('), AfterLParen));
                     case READ_LINE:
                     case NULL:
                     case INT_LIT:
@@ -1222,7 +1233,7 @@ public abstract class LLTable extends AbstractParser
                     case BOOL_LIT:
                     case INSTANCE_OF:
                     case READ_INTEGER:
-                        return new AbstractMap.SimpleEntry<>(114, Arrays.asList(Expr8));
+                        return new AbstractMap.SimpleEntry<>(117, Arrays.asList(Expr8));
                     default: return null;
                 }
             }
@@ -1231,10 +1242,10 @@ public abstract class LLTable extends AbstractParser
                 switch (lookahead) {
                     case CLASS:
                     case ABSTRACT:
-                        return new AbstractMap.SimpleEntry<>(115, Arrays.asList(ClassDef, ClassList));
+                        return new AbstractMap.SimpleEntry<>(118, Arrays.asList(ClassDef, ClassList));
                     case eof:
                     case eos:
-                        return new AbstractMap.SimpleEntry<>(116, Arrays.asList());
+                        return new AbstractMap.SimpleEntry<>(119, Arrays.asList());
                     default: return null;
                 }
             }
@@ -1246,7 +1257,7 @@ public abstract class LLTable extends AbstractParser
                     case INT:
                     case STRING:
                     case BOOL:
-                        return new AbstractMap.SimpleEntry<>(117, Arrays.asList(Type, Id));
+                        return new AbstractMap.SimpleEntry<>(120, Arrays.asList(Type, Id));
                     default: return null;
                 }
             }
@@ -1266,28 +1277,28 @@ public abstract class LLTable extends AbstractParser
     public void act(int id, SemValue[] params) {
         switch (id) {
             case 0: {
-                //# line 393
+                //# line 404
                 params[0] = new SemValue();
                 params[0].pos = params[1].pos;
                 params[0].code = BinaryOp.MUL.ordinal();
                 return;
             }
             case 1: {
-                //# line 399
+                //# line 410
                 params[0] = new SemValue();
                 params[0].pos = params[1].pos;
                 params[0].code = BinaryOp.DIV.ordinal();
                 return;
             }
             case 2: {
-                //# line 405
+                //# line 416
                 params[0] = new SemValue();
                 params[0].pos = params[1].pos;
                 params[0].code = BinaryOp.MOD.ordinal();
                 return;
             }
             case 3: {
-                //# line 552
+                //# line 563
                 var sv = new SemValue();
                 sv.code = params[1].code;
                 sv.pos = params[1].pos;
@@ -1297,7 +1308,7 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 4: {
-                //# line 562
+                //# line 573
                 params[0] = new SemValue();
                 params[0].thunkList = new ArrayList<>();
                 return;
@@ -1314,7 +1325,19 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 7: {
-                //# line 626
+                //# line 453
+                params[0] = new SemValue();    
+                params[0].expr = params[2].expr;
+                return;
+            }
+            case 8: {
+                //# line 458
+                params[0] = new SemValue();
+                params[0].block = params[1].block;
+                return;
+            }
+            case 9: {
+                //# line 637
                 params[0] = params[1];
                 for (var sv : params[2].thunkList) {
                     if (sv.expr != null) {
@@ -1328,78 +1351,78 @@ public abstract class LLTable extends AbstractParser
                 params[0].pos = params[0].expr.pos;
                 return;
             }
-            case 8: {
-                //# line 353
+            case 10: {
+                //# line 364
                 params[0] = new SemValue();
                 params[0].pos = params[1].pos;
                 params[0].code = BinaryOp.LE.ordinal();
                 return;
             }
-            case 9: {
-                //# line 359
+            case 11: {
+                //# line 370
                 params[0] = new SemValue();
                 params[0].pos = params[1].pos;
                 params[0].code = BinaryOp.GE.ordinal();
                 return;
             }
-            case 10: {
-                //# line 365
+            case 12: {
+                //# line 376
                 params[0] = new SemValue();
                 params[0].pos = params[1].pos;
                 params[0].code = BinaryOp.LT.ordinal();
                 return;
             }
-            case 11: {
-                //# line 371
+            case 13: {
+                //# line 382
                 params[0] = new SemValue();
                 params[0].pos = params[1].pos;
                 params[0].code = BinaryOp.GT.ordinal();
                 return;
             }
-            case 12: {
-                //# line 477
+            case 14: {
+                //# line 488
                 params[0] = buildBinaryExpr(params[1], params[2].thunkList);
                 return;
             }
-            case 13: {
+            case 15: {
                 //# line 28
                 params[0] = svClasses(params[1].clazz);
                 params[0].classList.addAll(params[2].classList);
                 tree = new TopLevel(params[0].classList, params[0].pos);
                 return;
             }
-            case 14: {
-                //# line 339
+            case 16: {
+                //# line 350
                 params[0] = new SemValue();
                 params[0].pos = params[1].pos;
                 params[0].code = BinaryOp.EQ.ordinal();
                 return;
             }
-            case 15: {
-                //# line 345
+            case 17: {
+                //# line 356
                 params[0] = new SemValue();
                 params[0].pos = params[1].pos;
                 params[0].code = BinaryOp.NE.ordinal();
                 return;
             }
-            case 16: {
+            case 18: {
                 //# line 111
                 params[0] = params[2];
                 params[0].varList.add(0, new LocalVarDef(Optional.ofNullable(params[1].type), params[1].id, params[1].pos));
                 return;
             }
-            case 17: {
+            case 19: {
                 //# line 116
                 params[0] = svVars();
                 return;
             }
-            case 18: {
-                //# line 569
+            case 20: {
+                //# line 580
                 params[0] = buildBinaryExpr(params[1], params[2].thunkList);
                 return;
             }
-            case 19: {
-                //# line 483
+            case 21: {
+                //# line 494
                 var sv = new SemValue();
                 sv.code = params[1].code;
                 sv.pos = params[1].pos;
@@ -1408,50 +1431,50 @@ public abstract class LLTable extends AbstractParser
                 params[0].thunkList.add(0, sv);
                 return;
             }
-            case 20: {
-                //# line 493
+            case 22: {
+                //# line 504
                 params[0] = new SemValue();
                 params[0].thunkList = new ArrayList<>();
                 return;
             }
-            case 21: {
-                //# line 252
+            case 23: {
+                //# line 263
                 params[0] = params[2];
                 params[0].stmtList.add(0, params[1].stmt);
                 return;
             }
-            case 22: {
-                //# line 257
+            case 24: {
+                //# line 268
                 params[0] = svStmts();
                 return;
             }
-            case 23: {
-                //# line 682
+            case 25: {
+                //# line 702
                 params[0] = params[1];
                 return;
             }
-            case 24: {
-                //# line 686
+            case 26: {
+                //# line 706
                 params[0] = svExpr(new This(params[1].pos));
                 return;
             }
-            case 25: {
-                //# line 690
+            case 27: {
+                //# line 710
                 params[0] = svExpr(new ReadInt(params[1].pos));
                 return;
             }
-            case 26: {
-                //# line 694
+            case 28: {
+                //# line 714
                 params[0] = svExpr(new ReadLine(params[1].pos));
                 return;
             }
-            case 27: {
-                //# line 698
+            case 29: {
+                //# line 718
                 params[0] = svExpr(new ClassTest(params[3].expr, params[5].id, params[1].pos));
                 return;
             }
-            case 28: {
-                //# line 702
+            case 30: {
+                //# line 722
                 if (params[2].id != null) {
                     params[0] = svExpr(new NewClass(params[2].id, params[1].pos));
                 } else {
@@ -1459,27 +1482,23 @@ public abstract class LLTable extends AbstractParser
                 }
                 return;
             }
-            case 29: {
-                //# line 710
-                if (params[2].exprList != null) {
-                    params[0] = svExpr(new Call(params[2].exprList, params[2].pos));
-                } else {
-                    params[0] = svExpr(new VarSel(params[1].id, params[1].pos));
-                }
-                return;
-            }
-            case 30: {
-                //# line 454
-                params[0] = buildBinaryExpr(params[1], params[2].thunkList);
-                return;
-            }
             case 31: {
-                //# line 606
-                params[0] = svExpr(new ClassCast(params[4].expr, params[2].id, params[4].pos));
+                //# line 730
+                params[0] = svExpr(new VarSel(params[1].id, params[1].pos));
                 return;
             }
             case 32: {
-                //# line 610
+                //# line 465
+                params[0] = buildBinaryExpr(params[1], params[2].thunkList);
+                return;
+            }
+            case 33: {
+                //# line 617
+                params[0] = svExpr(new ClassCast(params[4].expr, params[2].id, params[4].pos));
+                return;
+            }
+            case 34: {
+                //# line 621
                 params[0] = params[1];
                 for (var sv : params[3].thunkList) {
                     if (sv.expr != null) {
@@ -1493,36 +1512,24 @@ public abstract class LLTable extends AbstractParser
                 params[0].pos = params[0].expr.pos;
                 return;
             }
-            case 33: {
-                //# line 671
+            case 35: {
+                //# line 691
                 params[0] = params[2];
                 params[0].pos = params[1].pos;
                 return;
             }
-            case 34: {
-                //# line 676
-                params[0] = new SemValue();
-                return;
-            }
-            case 35: {
-                //# line 442
-                params[0] = new SemValue();    
-                params[0].expr = params[2].expr;
-                return;
-            }
             case 36: {
-                //# line 447
+                //# line 696
                 params[0] = new SemValue();
-                params[0].block = params[1].block;
                 return;
             }
             case 37: {
-                //# line 301
+                //# line 312
                 params[0] = params[2];
                 return;
             }
             case 38: {
-                //# line 305
+                //# line 316
                 params[0] = svStmt(null);
                 return;
             }
@@ -1554,13 +1561,13 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 43: {
-                //# line 290
+                //# line 301
                 params[0] = svExpr(params[2].expr);
                 params[0].pos = params[1].pos;
                 return;
             }
             case 44: {
-                //# line 295
+                //# line 306
                 params[0] = svExpr(null);
                 return;
             }
@@ -1575,59 +1582,59 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 47: {
-                //# line 764
+                //# line 780
                 params[0] = params[2];
                 params[0].exprList.add(0, params[1].expr);
                 return;
             }
             case 48: {
-                //# line 769
+                //# line 785
                 params[0] = svExprs();
                 return;
             }
             case 49: {
-                //# line 413
+                //# line 424
                 params[0] = new SemValue();
                 params[0].pos = params[1].pos;
                 params[0].code = UnaryOp.NEG.ordinal();
                 return;
             }
             case 50: {
-                //# line 419
+                //# line 430
                 params[0] = new SemValue();
                 params[0].pos = params[1].pos;
                 params[0].code = UnaryOp.NOT.ordinal();
                 return;
             }
             case 51: {
-                //# line 720
+                //# line 736
                 params[0] = svExpr(new IntLit(params[1].intVal, params[1].pos));
                 return;
             }
             case 52: {
-                //# line 724
+                //# line 740
                 params[0] = svExpr(new BoolLit(params[1].boolVal, params[1].pos));
                 return;
             }
             case 53: {
-                //# line 728
+                //# line 744
                 params[0] = svExpr(new StringLit(params[1].strVal, params[1].pos));
                 return;
             }
             case 54: {
-                //# line 732
+                //# line 748
                 params[0] = svExpr(new NullLit(params[1].pos));
                 return;
             }
             case 55: {
-                //# line 331
+                //# line 342
                 params[0] = new SemValue();
                 params[0].pos = params[1].pos;
                 params[0].code = BinaryOp.AND.ordinal();
                 return;
             }
             case 56: {
-                //# line 429
+                //# line 440
                 if(params[5].expr != null)
                     params[0] = svExpr(new Lambda(false, params[3].varList, Optional.ofNullable(params[5].expr), Optional.empty(), params[1].pos));
                 else
@@ -1635,12 +1642,12 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 57: {
-                //# line 436
+                //# line 447
                 params[0] = params[1];
                 return;
             }
             case 58: {
-                //# line 788
+                //# line 804
                 params[0] = svId(new Id(params[1].strVal, params[1].pos));
                 return;
             }
@@ -1656,17 +1663,17 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 60: {
-                //# line 546
+                //# line 557
                 params[0] = buildBinaryExpr(params[1], params[2].thunkList);
                 return;
             }
             case 61: {
-                //# line 738
+                //# line 754
                 params[0] = svId(params[1].id);
                 return;
             }
             case 62: {
-                //# line 742
+                //# line 758
                 params[0] = params[1];
                 for (int i = 0; i < params[3].intVal; i++) {
                     params[0].type = new TArray(params[0].type, params[1].pos);
@@ -1733,17 +1740,17 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 73: {
-                //# line 311
+                //# line 322
                 params[0] = params[1];
                 return;
             }
             case 74: {
-                //# line 315
+                //# line 326
                 params[0] = svExpr(null);
                 return;
             }
             case 75: {
-                //# line 500
+                //# line 511
                 params[0] = buildBinaryExpr(params[1], params[2].thunkList);
                 return;
             }
@@ -1771,7 +1778,7 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 80: {
-                //# line 506
+                //# line 517
                 var sv = new SemValue();
                 sv.code = params[1].code;
                 sv.pos = params[1].pos;
@@ -1781,18 +1788,18 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 81: {
-                //# line 516
+                //# line 527
                 params[0] = new SemValue();
                 params[0].thunkList = new ArrayList<>();
                 return;
             }
             case 82: {
-                //# line 206
+                //# line 217
                 params[0] = svStmt(params[1].block);
                 return;
             }
             case 83: {
-                //# line 210
+                //# line 221
                 if (params[1].stmt == null) {
                     params[0] = svStmt(new Skip(params[2].pos));
                 } else {
@@ -1801,44 +1808,44 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 84: {
-                //# line 218
+                //# line 229
                 params[0] = svStmt(new If(params[3].expr, params[5].stmt, Optional.ofNullable(params[6].stmt), params[1].pos));
                 return;
             }
             case 85: {
-                //# line 222
+                //# line 233
                 params[0] = svStmt(new While(params[3].expr, params[5].stmt, params[1].pos));
                 return;
             }
             case 86: {
-                //# line 226
+                //# line 237
                 if (params[3].stmt == null) params[3].stmt = new Skip(params[4].pos);
                 if (params[7].stmt == null) params[7].stmt = new Skip(params[8].pos);
                 params[0] = svStmt(new For(params[3].stmt, params[5].expr, params[7].stmt, params[9].stmt, params[1].pos));
                 return;
             }
             case 87: {
-                //# line 232
+                //# line 243
                 params[0] = svStmt(new Break(params[1].pos));
                 return;
             }
             case 88: {
-                //# line 236
+                //# line 247
                 params[0] = svStmt(new Return(Optional.ofNullable(params[2].expr), params[1].pos));
                 return;
             }
             case 89: {
-                //# line 240
+                //# line 251
                 params[0] = svStmt(new Print(params[3].exprList, params[1].pos));
                 return;
             }
             case 90: {
-                //# line 263
+                //# line 274
                 params[0] = svStmt(new LocalVarDef(Optional.ofNullable(params[1].type), params[1].id, params[2].pos, Optional.ofNullable(params[2].expr), params[1].pos));
                 return;
             }
             case 91: {
-                //# line 267
+                //# line 278
                 if (params[2].expr != null) {
                     if (params[1].expr instanceof LValue) {
                         var lv = (LValue) params[1].expr;
@@ -1852,22 +1859,22 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 92: {
-                //# line 280
+                //# line 291
                 params[0] = svStmt(null);
                 return;
             }
             case 93: {
-                //# line 284
-                params[0] = svStmt(new LocalVarDef(Optional.empty(), params[2].id, params[2].pos, Optional.ofNullable(params[4].expr), params[2].pos));
+                //# line 295
+                params[0] = svStmt(new LocalVarDef(Optional.empty(), params[2].id, params[3].pos, Optional.ofNullable(params[4].expr), params[2].pos));
                 return;
             }
             case 94: {
-                //# line 246
+                //# line 257
                 params[0] = svBlock(new Block(params[2].stmtList, params[1].pos));
                 return;
             }
             case 95: {
-                //# line 460
+                //# line 471
                 var sv = new SemValue();
                 sv.code = params[1].code;
                 sv.pos = params[1].pos;
@@ -1877,18 +1884,29 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 96: {
-                //# line 470
+                //# line 481
                 params[0] = new SemValue();
                 params[0].thunkList = new ArrayList<>();
                 return;
             }
             case 97: {
-                //# line 523
-                params[0] = buildBinaryExpr(params[1], params[2].thunkList);
+                //# line 204
+                params[0] = params[3];
+                params[0].typeList.add(0, params[2].type);
                 return;
             }
             case 98: {
-                //# line 529
+                //# line 209
+                params[0] = svTypes();
+                return;
+            }
+            case 99: {
+                //# line 534
+                params[0] = buildBinaryExpr(params[1], params[2].thunkList);
+                return;
+            }
+            case 100: {
+                //# line 540
                 var sv = new SemValue();
                 sv.code = params[1].code;
                 sv.pos = params[1].pos;
@@ -1897,26 +1915,26 @@ public abstract class LLTable extends AbstractParser
                 params[0].thunkList.add(0, sv);
                 return;
             }
-            case 99: {
-                //# line 539
+            case 101: {
+                //# line 550
                 params[0] = new SemValue();
                 params[0].thunkList = new ArrayList<>();
                 return;
             }
-            case 100: {
-                //# line 752
+            case 102: {
+                //# line 768
                 params[0] = params[3];
                 params[0].intVal++;
                 return;
             }
-            case 101: {
-                //# line 757
+            case 103: {
+                //# line 773
                 params[0] = svExpr(params[1].expr);
                 params[0].intVal = 0; // counter
                 return;
             }
-            case 102: {
-                //# line 575
+            case 104: {
+                //# line 586
                 var sv = new SemValue();
                 sv.code = params[1].code;
                 sv.pos = params[1].pos;
@@ -1925,21 +1943,21 @@ public abstract class LLTable extends AbstractParser
                 params[0].thunkList.add(0, sv);
                 return;
             }
-            case 103: {
-                //# line 585
+            case 105: {
+                //# line 596
                 params[0] = new SemValue();
                 params[0].thunkList = new ArrayList<>();
                 return;
             }
-            case 104: {
-                //# line 323
+            case 106: {
+                //# line 334
                 params[0] = new SemValue();
                 params[0].pos = params[1].pos;
                 params[0].code = BinaryOp.OR.ordinal();
                 return;
             }
-            case 105: {
-                //# line 642
+            case 107: {
+                //# line 653
                 var sv = new SemValue();
                 sv.expr = params[2].expr;
                 sv.pos = params[1].pos;
@@ -1947,8 +1965,8 @@ public abstract class LLTable extends AbstractParser
                 params[0].thunkList.add(0, sv);
                 return;
             }
-            case 106: {
-                //# line 651
+            case 108: {
+                //# line 662
                 var sv = new SemValue();
                 sv.id = params[2].id;
                 sv.pos = params[2].pos;
@@ -1960,64 +1978,73 @@ public abstract class LLTable extends AbstractParser
                 params[0].thunkList.add(0, sv);
                 return;
             }
-            case 107: {
-                //# line 664
+            case 109: {
+                //# line 675
                 params[0] = new SemValue();
                 params[0].thunkList = new ArrayList<>();
                 return;
             }
-            case 108: {
-                //# line 775
+            case 110: {
+                //# line 680
+                var sv = new SemValue();
+                sv.pos = params[1].pos;    
+                sv.exprList = params[2].exprList;
+                params[0] = params[4];
+                params[0].thunkList.add(0, sv);
+                return;
+            }
+            case 111: {
+                //# line 791
                 params[0] = params[3];
                 params[0].exprList.add(0, params[2].expr);
                 return;
             }
-            case 109: {
-                //# line 780
+            case 112: {
+                //# line 796
                 params[0] = svExprs();
                 return;
             }
-            case 110: {
-                //# line 379
+            case 113: {
+                //# line 390
                 params[0] = new SemValue();
                 params[0].pos = params[1].pos;
                 params[0].code = BinaryOp.ADD.ordinal();
                 return;
             }
-            case 111: {
-                //# line 385
+            case 114: {
+                //# line 396
                 params[0] = new SemValue();
                 params[0].pos = params[1].pos;
                 params[0].code = BinaryOp.SUB.ordinal();
                 return;
             }
-            case 112: {
-                //# line 592
+            case 115: {
+                //# line 603
                 params[0] = svExpr(new Unary(UnaryOp.values()[params[1].code], params[2].expr, params[1].pos));
                 return;
             }
-            case 113: {
-                //# line 596
+            case 116: {
+                //# line 607
                 params[0] = params[2];
                 return;
             }
-            case 114: {
-                //# line 600
+            case 117: {
+                //# line 611
                 params[0] = params[1];
                 return;
             }
-            case 115: {
+            case 118: {
                 //# line 37
                 params[0] = params[2];
                 params[0].classList.add(0, params[1].clazz);
                 return;
             }
-            case 116: {
+            case 119: {
                 //# line 42
                 params[0] = svClasses();
                 return;
             }
-            case 117: {
+            case 120: {
                 //# line 105
                 params[0] = svVar(params[1].type, params[2].id, params[2].pos);
                 return;

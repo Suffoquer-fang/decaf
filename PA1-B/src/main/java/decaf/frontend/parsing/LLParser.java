@@ -101,6 +101,9 @@ public class LLParser extends Phase<InputStream, Tree.TopLevel> {
                 case Tokens.EQUAL -> EQUAL;
                 case Tokens.NOT_EQUAL -> NOT_EQUAL;
                 case Tokens.ABSTRACT -> ABSTRACT;
+                case Tokens.VAR -> VAR;
+                case Tokens.ARROW -> ARROW;
+                case Tokens.FUN -> FUN;
                 default -> code; // single-character, use their ASCII code!
             };
         }
@@ -115,7 +118,8 @@ public class LLParser extends Phase<InputStream, Tree.TopLevel> {
          * @return the parsed value of {@code symbol} if parsing succeeds, or else {@code null}.
          */
         private SemValue parseSymbol(int symbol, Set<Integer> follow) {
-            var result = query(symbol, token); // get production by lookahead symbol
+            var result = query(symbol, token);
+            //if(result == null) System.out.println(result); // get production by lookahead symbol
             var actionId = result.getKey(); // get user-defined action
 
             var right = result.getValue(); // right-hand side of production
