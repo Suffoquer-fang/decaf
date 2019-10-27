@@ -1,7 +1,7 @@
 /* This is auto-generated source by LL1-Parser-Gen.
  * Specification file: D:\Workspace\decaf-github\PA1-B\src\main\ll1pg\Decaf.spec
  * Options: unstrict mode
- * Generated at: Sun Oct 27 21:44:52 CST 2019
+ * Generated at: Sun Oct 27 22:36:34 CST 2019
  * Please do NOT modify it!
  *
  * Project repository: https://github.com/paulzfm/LL1-Parser-Gen
@@ -537,7 +537,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 701
+            //# line 706
             case Expr9: {
                 switch (lookahead) {
                     case INT_LIT:
@@ -603,7 +603,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 690
+            //# line 695
             case ExprListOpt: {
                 switch (lookahead) {
                     case '(':
@@ -709,7 +709,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 779
+            //# line 784
             case ExprList: {
                 switch (lookahead) {
                     case '!':
@@ -742,7 +742,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 735
+            //# line 740
             case Literal: {
                 switch (lookahead) {
                     case INT_LIT:
@@ -786,7 +786,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 803
+            //# line 808
             case Id: {
                 switch (lookahead) {
                     case IDENTIFIER:
@@ -826,7 +826,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 753
+            //# line 758
             case AfterNewExpr: {
                 switch (lookahead) {
                     case IDENTIFIER:
@@ -1107,7 +1107,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 767
+            //# line 772
             case AfterLBrack: {
                 switch (lookahead) {
                     case ']':
@@ -1164,7 +1164,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 652
+            //# line 657
             case ExprT8: {
                 switch (lookahead) {
                     case '[':
@@ -1195,7 +1195,7 @@ public abstract class LLTable extends AbstractParser
                     default: return null;
                 }
             }
-            //# line 790
+            //# line 795
             case ExprList1: {
                 switch (lookahead) {
                     case ',':
@@ -1343,7 +1343,12 @@ public abstract class LLTable extends AbstractParser
                     if (sv.expr != null) {
                         params[0] = svExpr(new IndexSel(params[0].expr, sv.expr, sv.pos));
                     } else if (sv.exprList != null) {
-                        params[0] = svExpr(new Call(params[0].expr, sv.exprList, sv.pos));
+                        if (sv.id == null)
+                            params[0] = svExpr(new Call(params[0].expr, sv.exprList, sv.pos));
+                        else {
+                            params[0] = svExpr(new VarSel(params[0].expr, sv.id, sv.id.pos));
+                            params[0] = svExpr(new Call(params[0].expr, sv.exprList, sv.pos));
+                        }
                     } else {
                         params[0] = svExpr(new VarSel(params[0].expr, sv.id, sv.pos));
                     }
@@ -1449,32 +1454,32 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 25: {
-                //# line 702
+                //# line 707
                 params[0] = params[1];
                 return;
             }
             case 26: {
-                //# line 706
+                //# line 711
                 params[0] = svExpr(new This(params[1].pos));
                 return;
             }
             case 27: {
-                //# line 710
+                //# line 715
                 params[0] = svExpr(new ReadInt(params[1].pos));
                 return;
             }
             case 28: {
-                //# line 714
+                //# line 719
                 params[0] = svExpr(new ReadLine(params[1].pos));
                 return;
             }
             case 29: {
-                //# line 718
+                //# line 723
                 params[0] = svExpr(new ClassTest(params[3].expr, params[5].id, params[1].pos));
                 return;
             }
             case 30: {
-                //# line 722
+                //# line 727
                 if (params[2].id != null) {
                     params[0] = svExpr(new NewClass(params[2].id, params[1].pos));
                 } else {
@@ -1483,7 +1488,7 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 31: {
-                //# line 730
+                //# line 735
                 params[0] = svExpr(new VarSel(params[1].id, params[1].pos));
                 return;
             }
@@ -1513,13 +1518,13 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 35: {
-                //# line 691
+                //# line 696
                 params[0] = params[2];
                 params[0].pos = params[1].pos;
                 return;
             }
             case 36: {
-                //# line 696
+                //# line 701
                 params[0] = new SemValue();
                 return;
             }
@@ -1582,13 +1587,13 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 47: {
-                //# line 780
+                //# line 785
                 params[0] = params[2];
                 params[0].exprList.add(0, params[1].expr);
                 return;
             }
             case 48: {
-                //# line 785
+                //# line 790
                 params[0] = svExprs();
                 return;
             }
@@ -1607,22 +1612,22 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 51: {
-                //# line 736
+                //# line 741
                 params[0] = svExpr(new IntLit(params[1].intVal, params[1].pos));
                 return;
             }
             case 52: {
-                //# line 740
+                //# line 745
                 params[0] = svExpr(new BoolLit(params[1].boolVal, params[1].pos));
                 return;
             }
             case 53: {
-                //# line 744
+                //# line 749
                 params[0] = svExpr(new StringLit(params[1].strVal, params[1].pos));
                 return;
             }
             case 54: {
-                //# line 748
+                //# line 753
                 params[0] = svExpr(new NullLit(params[1].pos));
                 return;
             }
@@ -1647,7 +1652,7 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 58: {
-                //# line 804
+                //# line 809
                 params[0] = svId(new Id(params[1].strVal, params[1].pos));
                 return;
             }
@@ -1668,12 +1673,12 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 61: {
-                //# line 754
+                //# line 759
                 params[0] = svId(params[1].id);
                 return;
             }
             case 62: {
-                //# line 758
+                //# line 763
                 params[0] = params[1];
                 for (int i = 0; i < params[3].intVal; i++) {
                     params[0].type = new TArray(params[0].type, params[1].pos);
@@ -1922,13 +1927,13 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 102: {
-                //# line 768
+                //# line 773
                 params[0] = params[3];
                 params[0].intVal++;
                 return;
             }
             case 103: {
-                //# line 773
+                //# line 778
                 params[0] = svExpr(params[1].expr);
                 params[0].intVal = 0; // counter
                 return;
@@ -1957,7 +1962,7 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 107: {
-                //# line 653
+                //# line 658
                 var sv = new SemValue();
                 sv.expr = params[2].expr;
                 sv.pos = params[1].pos;
@@ -1966,7 +1971,7 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 108: {
-                //# line 662
+                //# line 667
                 var sv = new SemValue();
                 sv.id = params[2].id;
                 sv.pos = params[2].pos;
@@ -1979,13 +1984,13 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 109: {
-                //# line 675
+                //# line 680
                 params[0] = new SemValue();
                 params[0].thunkList = new ArrayList<>();
                 return;
             }
             case 110: {
-                //# line 680
+                //# line 685
                 var sv = new SemValue();
                 sv.pos = params[1].pos;    
                 sv.exprList = params[2].exprList;
@@ -1994,13 +1999,13 @@ public abstract class LLTable extends AbstractParser
                 return;
             }
             case 111: {
-                //# line 791
+                //# line 796
                 params[0] = params[3];
                 params[0].exprList.add(0, params[2].expr);
                 return;
             }
             case 112: {
-                //# line 796
+                //# line 801
                 params[0] = svExprs();
                 return;
             }

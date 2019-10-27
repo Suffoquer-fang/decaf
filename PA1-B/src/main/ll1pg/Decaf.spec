@@ -640,7 +640,12 @@ Expr8           :   Expr9 ExprT8
                             if (sv.expr != null) {
                                 $$ = svExpr(new IndexSel($$.expr, sv.expr, sv.pos));
                             } else if (sv.exprList != null) {
-                                $$ = svExpr(new Call($$.expr, sv.exprList, sv.pos));
+                                if (sv.id == null)
+                                    $$ = svExpr(new Call($$.expr, sv.exprList, sv.pos));
+                                else {
+                                    $$ = svExpr(new VarSel($$.expr, sv.id, sv.id.pos));
+                                    $$ = svExpr(new Call($$.expr, sv.exprList, sv.pos));
+                                }
                             } else {
                                 $$ = svExpr(new VarSel($$.expr, sv.id, sv.pos));
                             }
