@@ -13,9 +13,9 @@ import java.util.Optional;
 public abstract class Tree {
     public enum Kind {
         TOP_LEVEL, CLASS_DEF, VAR_DEF, METHOD_DEF,
-        T_INT, T_BOOL, T_STRING, T_VOID, T_CLASS, T_ARRAY,
+        T_INT, T_BOOL, T_STRING, T_VOID, T_CLASS, T_ARRAY, T_LAMBDA,
         LOCAL_VAR_DEF, BLOCK, ASSIGN, EXPR_EVAL, SKIP, IF, WHILE, FOR, BREAK, RETURN, PRINT,
-        INT_LIT, BOOL_LIT, STRING_LIT, NULL_LIT, VAR_SEL, INDEX_SEL, CALL,
+        INT_LIT, BOOL_LIT, STRING_LIT, NULL_LIT, VAR_SEL, INDEX_SEL, CALL, LAMBDA_EXPR,
         THIS, UNARY_EXPR, BINARY_EXPR, READ_INT, READ_LINE, NEW_CLASS, NEW_ARRAY, CLASS_TEST, CLASS_CAST
     }
 
@@ -401,6 +401,36 @@ public abstract class Tree {
         }
     }
 
+    public static class TLambda extends TypeLit {
+        public TypeLit returnType;
+        public List<TypeLit> typeList;
+        public TLambda(TypeLit type, List<TypeLit> typeList, Pos pos) {
+            super(Kind.T_LAMBDA, "TLambda", pos);
+            this.returnType = type;
+            this.typeList = typeList;
+        }
+
+        @Override
+        public Object treeElementAt(int index) {
+            return switch (index) {
+                case 0 -> returnType;
+                case 1 -> typeList;
+                default -> throw new IndexOutOfBoundsException(index);
+            }; 
+        }
+
+        @Override
+        public int treeArity() {
+            return 2;
+        }
+
+        @Override
+        public <C> void accept(Visitor<C> v, C ctx) {
+            v.visitOthers(this, ctx);
+        }
+    }
+
+
 
     /**
      * Statement.
@@ -429,14 +459,14 @@ public abstract class Tree {
      */
     public static class LocalVarDef extends Stmt {
         // Tree elements
-        public TypeLit typeLit;
+        public Optional<TypeLit> typeLit;
         public Id id;
         public Pos assignPos;
         public Optional<Expr> initVal;
         // For convenience
         public String name;
 
-        public LocalVarDef(TypeLit typeLit, Id id, Pos assignPos, Optional<Expr> initVal, Pos pos) {
+        public LocalVarDef(Optional<TypeLit> typeLit, Id id, Pos assignPos, Optional<Expr> initVal, Pos pos) {
             // pos = id.pos, assignPos = position of the '='
             // TODO: looks not very consistent, maybe we shall always report error simply at `pos`, not `assignPos`?
             super(Kind.LOCAL_VAR_DEF, "LocalVarDef", pos);
@@ -447,7 +477,7 @@ public abstract class Tree {
             this.name = id.name;
         }
 
-        public LocalVarDef(TypeLit typeLit, Id id, Pos pos) {
+        public LocalVarDef(Optional<TypeLit> typeLit, Id id, Pos pos) {
             this(typeLit, id, Pos.NoPos, Optional.empty(), pos);
         }
 
@@ -1165,6 +1195,41 @@ public abstract class Tree {
         }
     }
 
+    public static class Lambda extends Expr {
+        // Tree elements
+        public List<LocalVarDef> params;
+        public Optional<Block> body;
+        public Optional<Expr> expr;
+        public boolean isBlock;
+
+        public Lambda(boolean isBlock, List<LocalVarDef> params, Optional<Expr> expr, Optional<Block> body, Pos pos) {
+            super(Kind.LAMBDA_EXPR, "Lambda", pos);
+            this.params = params;
+            this.expr = expr;
+            this.body = body;
+            this.isBlock = isBlock;
+        }
+
+        @Override
+        public Object treeElementAt(int index) {
+            return switch (index) {
+                case 0 -> params;
+                case 1 -> isBlock ? body : expr;
+                default -> throw new IndexOutOfBoundsException(index);
+            };
+        }
+
+        @Override
+        public int treeArity() {
+            return 2;
+        }
+
+        @Override
+        public <C> void accept(Visitor<C> v, C ctx) {
+            v.visitOthers(this, ctx);
+        }
+    }
+
     public enum BinaryOp {
         ADD, SUB, MUL, DIV, MOD,
         EQ, NE, GE, GT, LE, LT,
@@ -1440,50 +1505,45 @@ public abstract class Tree {
      */
     public static class Call extends Expr {
         // Tree elements
-        public Optional<Expr> receiver;
-        public Id method;
+        public Optional<Expr> expr;
         public List<Expr> args;
         //
-        public String methodName;
 
-        public Call(Optional<Expr> receiver, Id method, List<Expr> args, Pos pos) {
+        public Call(Optional<Expr> expr, List<Expr> args, Pos pos) {
             super(Kind.CALL, "Call", pos);
-            this.receiver = receiver;
-            this.method = method;
+            this.expr = expr;
             this.args = args;
-            this.methodName = method.name;
         }
 
-        public Call(Id method, List<Expr> args, Pos pos) {
-            this(Optional.empty(), method, args, pos);
+        public Call(List<Expr> args, Pos pos) {
+            this(Optional.empty(), args, pos);
         }
 
-        public Call(Expr receiver, Id method, List<Expr> args, Pos pos) {
-            this(Optional.of(receiver), method, args, pos);
+        public Call(Expr expr, List<Expr> args, Pos pos) {
+            this(Optional.of(expr), args, pos);
         }
 
         /**
-         * Set its receiver as {@code this}.
+         * Set its expr as {@code this}.
          * <p>
          * Reversed for type check.
          */
         public void setThis() {
-            this.receiver = Optional.of(new This(pos));
+            this.expr = Optional.of(new This(pos));
         }
 
         @Override
         public Object treeElementAt(int index) {
             return switch (index) {
-                case 0 -> receiver;
-                case 1 -> method;
-                case 2 -> args;
+                case 0 -> expr;
+                case 1 -> args;
                 default -> throw new IndexOutOfBoundsException(index);
             };
         }
 
         @Override
         public int treeArity() {
-            return 3;
+            return 2;
         }
 
         @Override

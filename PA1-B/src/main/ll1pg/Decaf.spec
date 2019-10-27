@@ -18,7 +18,7 @@ PRINT        READ_INTEGER            READ_LINE
 BOOL_LIT     INT_LIT     STRING_LIT
 IDENTIFIER   AND         OR          STATIC      INSTANCE_OF
 LESS_EQUAL   GREATER_EQUAL           EQUAL       NOT_EQUAL
-ABSTRACT 
+ABSTRACT VAR  FUN  ARROW
 '+'  '-'  '*'  '/'  '%'  '='  '>'  '<'  '.'
 ','  ';'  '!'  '('  ')'  '['  ']'  '{'  '}'
 
@@ -110,7 +110,7 @@ Var             :   Type Id
 VarList         :   Var VarList1
                     {
                         $$ = $2;
-                        $$.varList.add(0, new LocalVarDef($1.type, $1.id, $1.pos));
+                        $$.varList.add(0, new LocalVarDef(Optional.ofNullable($1.type), $1.id, $1.pos));
                     }
                 |   /* empty */
                     {
@@ -121,7 +121,7 @@ VarList         :   Var VarList1
 VarList1        :   ',' Var VarList1
                     {
                         $$ = $3;
-                        $$.varList.add(0, new LocalVarDef($2.type, $2.id, $2.pos));
+                        $$.varList.add(0, new LocalVarDef(Optional.ofNullable($2.type), $2.id, $2.pos));
                     }
                 |   /* empty */
                     {
@@ -156,21 +156,47 @@ AtomType        :   INT
 Type            :   AtomType ArrayType
                     {
                         $$ = $1;
-                        for (int i = 0; i < $2.intVal; i++) {
-                            $$.type = new TArray($$.type, $1.type.pos);
+                        for (var sv : $2.thunkList) {
+                            if(sv.typeList == null)
+                                $$.type = new TArray($$.type, $1.type.pos);
+                            else
+                                $$.type = new TLambda($$.type, sv.typeList, $1.type.pos);
                         }
                     }
                 ;
 
+
 ArrayType       :   '[' ']' ArrayType
                     {
+                        var sv = new SemValue();
                         $$ = $3;
                         $$.intVal++;
+                        $$.thunkList.add(0, sv);
+                    }
+                |   '(' TypeList ')' ArrayType
+                    {
+                        var sv = new SemValue();
+                        sv.typeList = $2.typeList;
+                        
+                        $$ = $4;
+                        $$.thunkList.add(0, sv);
                     }
                 |   /* empty */
                     {
                         $$ = new SemValue();
                         $$.intVal = 0; // counter
+                        $$.thunkList = new ArrayList<>();
+                    }
+                ;
+
+TypeList        :   Type TypeList
+                    {
+                        $$ = $2;
+                        $$.typeList.add(0, $1.type);
+                    }
+                |   /* empty */
+                    {
+                        $$ = svTypes();
                     }
                 ;
 
@@ -235,7 +261,7 @@ StmtList        :   Stmt StmtList
 
 SimpleStmt      :   Var Initializer
                     {
-                        $$ = svStmt(new LocalVarDef($1.type, $1.id, $2.pos, Optional.ofNullable($2.expr), $1.pos));
+                        $$ = svStmt(new LocalVarDef(Optional.ofNullable($1.type), $1.id, $2.pos, Optional.ofNullable($2.expr), $1.pos));
                     }
                 |   Expr Initializer
                     {
@@ -253,6 +279,10 @@ SimpleStmt      :   Var Initializer
                 |   /* empty */
                     {
                         $$ = svStmt(null);
+                    }
+                |   VAR Id '=' Expr
+                    {
+                        $$ = svStmt(new LocalVarDef(Optional.empty(), $2.id, $2.pos, Optional.ofNullable($4.expr), $2.pos));
                     }
                 ;
 
@@ -395,10 +425,29 @@ Op7             :   '-'
 
 // Expressions
 
-Expr            :   Expr1
+Expr            :   FUN '(' VarList ')' AfterRBrack
+                    {
+                        if($5.expr != null)
+                            $$ = svExpr(new Lambda(false, $3.varList, Optional.ofNullable($5.expr), Optional.empty(), $1.pos));
+                        else
+                            $$ = svExpr(new Lambda(true, $3.varList, Optional.empty(), Optional.ofNullable($5.block), $1.pos));
+                    }
+                |   Expr1
                     {
                         $$ = $1;
                     }
+                ;
+
+AfterRBrack     :   ARROW Expr
+                {
+                    $$ = new SemValue();    
+                    $$.expr = $2.expr;
+                }
+                |   Block
+                {
+                    $$ = new SemValue();
+                    $$.block = $1.block;
+                }
                 ;
 
 Expr1           :   Expr2 ExprT1
@@ -564,7 +613,7 @@ AfterLParen     :   CLASS Id ')' Expr7
                             if (sv.expr != null) {
                                 $$ = svExpr(new IndexSel($$.expr, sv.expr, sv.pos));
                             } else if (sv.exprList != null) {
-                                $$ = svExpr(new Call($$.expr, sv.id, sv.exprList, sv.pos));
+                                $$ = svExpr(new Call($$.expr, sv.exprList, sv.pos));
                             } else {
                                 $$ = svExpr(new VarSel($$.expr, sv.id, sv.pos));
                             }
@@ -580,7 +629,7 @@ Expr8           :   Expr9 ExprT8
                             if (sv.expr != null) {
                                 $$ = svExpr(new IndexSel($$.expr, sv.expr, sv.pos));
                             } else if (sv.exprList != null) {
-                                $$ = svExpr(new Call($$.expr, sv.id, sv.exprList, sv.pos));
+                                $$ = svExpr(new Call($$.expr, sv.exprList, sv.pos));
                             } else {
                                 $$ = svExpr(new VarSel($$.expr, sv.id, sv.pos));
                             }
@@ -660,7 +709,7 @@ Expr9           :   Literal
                 |   Id ExprListOpt
                     {
                         if ($2.exprList != null) {
-                            $$ = svExpr(new Call($1.id, $2.exprList, $2.pos));
+                            $$ = svExpr(new Call($2.exprList, $2.pos));
                         } else {
                             $$ = svExpr(new VarSel($1.id, $1.pos));
                         }

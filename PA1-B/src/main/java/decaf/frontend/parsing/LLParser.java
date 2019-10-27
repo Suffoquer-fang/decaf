@@ -124,6 +124,7 @@ public class LLParser extends Phase<InputStream, Tree.TopLevel> {
 
             for (var i = 0; i < length; i++) { // parse right-hand side symbols one by one
                 var term = right.get(i);
+               // System.out.println(params[i]);
                 params[i + 1] = isNonTerminal(term)
                         ? parseSymbol(term, follow) // for non terminals: recursively parse it
                         : matchToken(term) // for terminals: match token
