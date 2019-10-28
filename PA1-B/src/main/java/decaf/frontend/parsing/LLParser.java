@@ -58,6 +58,7 @@ public class LLParser extends Phase<InputStream, Tree.TopLevel> {
     }
 
     private class Parser extends decaf.frontend.parsing.LLTable {
+        boolean hasError = false;
         @Override
         boolean parse() {
             var sv = parseSymbol(start, new TreeSet<>());
@@ -119,7 +120,27 @@ public class LLParser extends Phase<InputStream, Tree.TopLevel> {
          */
         private SemValue parseSymbol(int symbol, Set<Integer> follow) {
             var result = query(symbol, token);
-            //if(result == null) System.out.println(result); // get production by lookahead symbol
+            // get production by lookahead symbol
+
+
+            var beginA = beginSet(symbol);
+            var endA = followSet(symbol);
+            endA.addAll(follow);
+            if (!beginA.contains(token)) {
+                hasError = true;
+                yyerror("syntax error");
+                while (true) {
+                    if (beginA.contains(token)) {
+                        result = query(symbol, token);
+                        break;
+                    }
+                    else if (endA.contains(token))
+                        return null;
+                    token = nextToken();
+                }
+            }
+
+
             var actionId = result.getKey(); // get user-defined action
 
             var right = result.getValue(); // right-hand side of production
@@ -130,12 +151,12 @@ public class LLParser extends Phase<InputStream, Tree.TopLevel> {
                 var term = right.get(i);
                // System.out.println(params[i]);
                 params[i + 1] = isNonTerminal(term)
-                        ? parseSymbol(term, follow) // for non terminals: recursively parse it
+                        ? parseSymbol(term, endA) // for non terminals: recursively parse it
                         : matchToken(term) // for terminals: match token
                 ;
             }
 
-            act(actionId, params); // do user-defined action
+            if (!hasError) act(actionId, params); // do user-defined action
             return params[0];
         }
 
@@ -155,5 +176,7 @@ public class LLParser extends Phase<InputStream, Tree.TopLevel> {
             token = nextToken();
             return self;
         }
+
+        
     }
 }

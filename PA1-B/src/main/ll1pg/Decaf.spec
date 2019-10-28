@@ -663,17 +663,13 @@ ExprT8          :   '[' Expr ']' ExprT8
                         $$ = $4;
                         $$.thunkList.add(0, sv);
                     }
-                |   '.' Id ExprListOpt ExprT8
+                |   '.' Id ExprT8
                     {
                         var sv = new SemValue();
                         sv.id = $2.id;
                         sv.pos = $2.pos;
-                        if ($3.exprList != null) {
-                            sv.exprList = $3.exprList;
-                            sv.pos = $3.pos;
-                        }
-
-                        $$ = $4;
+                    
+                        $$ = $3;
                         $$.thunkList.add(0, sv);
                     }
                 |   /* empty */
@@ -689,17 +685,6 @@ ExprT8          :   '[' Expr ']' ExprT8
                     
                         $$ = $4;
                         $$.thunkList.add(0, sv);
-                    }
-                ;
-
-ExprListOpt     :   '(' ExprList ')'
-                    {
-                        $$ = $2;
-                        $$.pos = $1.pos;
-                    }
-                |   /* empty */
-                    {
-                        $$ = new SemValue();
                     }
                 ;
 
