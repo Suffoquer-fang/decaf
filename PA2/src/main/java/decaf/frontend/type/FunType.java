@@ -7,9 +7,9 @@ import java.util.List;
  */
 public final class FunType extends Type {
 
-    public final Type returnType;
+    public Type returnType;
 
-    public final List<Type> argTypes;
+    public List<Type> argTypes;
 
     public FunType(Type returnType, List<Type> argTypes) {
         this.returnType = returnType;

@@ -6,6 +6,7 @@ import decaf.frontend.symbol.ClassSymbol;
 import decaf.frontend.symbol.MethodSymbol;
 import decaf.frontend.symbol.VarSymbol;
 import decaf.frontend.type.FunType;
+import decaf.frontend.symbol.LambdaSymbol;
 import decaf.frontend.type.Type;
 
 import java.util.ArrayList;
@@ -448,7 +449,7 @@ public abstract class Tree {
 
         @Override
         public <C> void accept(Visitor<C> v, C ctx) {
-            v.visitOthers(this, ctx);
+            v.visitTLambda(this, ctx);
         }
     }
 
@@ -1570,6 +1571,7 @@ public abstract class Tree {
         public Optional<Block> body;
         public Optional<Expr> expr;
         public boolean isBlock;
+        public LambdaSymbol symbol;
 
         public Lambda(boolean isBlock, List<LocalVarDef> params, Optional<Expr> expr, Optional<Block> body, Pos pos) {
             super(Kind.LAMBDA_EXPR, "Lambda", pos);
@@ -1595,8 +1597,9 @@ public abstract class Tree {
 
         @Override
         public <C> void accept(Visitor<C> v, C ctx) {
-            v.visitOthers(this, ctx);
+            v.visitLambda(this, ctx);
         }
+
     }
 
     /**

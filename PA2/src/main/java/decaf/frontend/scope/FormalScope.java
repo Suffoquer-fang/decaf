@@ -1,5 +1,6 @@
 package decaf.frontend.scope;
 
+import decaf.frontend.symbol.LambdaSymbol;
 import decaf.frontend.symbol.MethodSymbol;
 
 /**
@@ -15,8 +16,16 @@ public class FormalScope extends Scope {
         return owner;
     }
 
+    public LambdaSymbol getLambdaOwner() {
+        return lambdaOwner;
+    }
+
     public void setOwner(MethodSymbol owner) {
         this.owner = owner;
+    }
+
+    public void setOwner(LambdaSymbol owner) {
+        this.lambdaOwner = owner;
     }
 
     @Override
@@ -43,6 +52,7 @@ public class FormalScope extends Scope {
     }
 
     private MethodSymbol owner;
+    private LambdaSymbol lambdaOwner;
 
     private LocalScope nested;
 }

@@ -12,10 +12,12 @@ import decaf.frontend.tree.Tree;
 import decaf.frontend.type.ArrayType;
 import decaf.frontend.type.BuiltInType;
 import decaf.frontend.type.ClassType;
+import decaf.frontend.type.FunType;
 import decaf.frontend.type.Type;
 import decaf.lowlevel.log.IndentPrinter;
 import decaf.printing.PrettyScope;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -61,6 +63,7 @@ public class Typer extends Phase<Tree.TopLevel, Tree.TopLevel> implements TypeLi
 
     @Override
     public void visitMethodDef(Tree.MethodDef method, ScopeStack ctx) {
+        if (!method.body.isPresent()) return;
         ctx.open(method.symbol.scope);
         method.body.get().accept(this, ctx);
         if (!method.symbol.type.returnType.isVoidType() && !method.body.get().returns) {
@@ -300,6 +303,10 @@ public class Typer extends Phase<Tree.TopLevel, Tree.TopLevel> implements TypeLi
         if (clazz.isPresent()) {
             expr.symbol = clazz.get();
             expr.type = expr.symbol.type;
+            if(clazz.get().modifiers.isAbstract())
+            {
+                issue(new InstantiateAbstractError(expr.pos, expr.symbol.name));
+            }
         } else {
             issue(new ClassNotFoundError(expr.pos, expr.clazz.name));
             expr.type = BuiltInType.ERROR;
@@ -312,6 +319,19 @@ public class Typer extends Phase<Tree.TopLevel, Tree.TopLevel> implements TypeLi
             issue(new ThisInStaticFuncError(expr.pos));
         }
         expr.type = ctx.currentClass().type;
+    }
+
+    @Override
+    public void visitLambda(Tree.Lambda expr, ScopeStack ctx) {
+        ctx.open(expr.symbol.formalScope);
+        ctx.open(expr.symbol.localScope);
+        if(expr.expr.isPresent()) 
+            expr.expr.get().accept(this, ctx);
+        else
+            expr.body.get().accept(this, ctx);
+        ctx.close();
+        ctx.close();
+        expr.symbol.type.returnType = expr.expr.get().type;
     }
 
     private boolean allowClassNameVar = false;
@@ -546,11 +566,21 @@ public class Typer extends Phase<Tree.TopLevel, Tree.TopLevel> implements TypeLi
         var initVal = stmt.initVal.get();
         localVarDefPos = Optional.ofNullable(stmt.id.pos);
         initVal.accept(this, ctx);
+        
         localVarDefPos = Optional.empty();
         var lt = stmt.symbol.type;
         var rt = initVal.type;
 
-        if (lt.noError() && (lt.isFuncType() || !rt.subtypeOf(lt))) {
+        if (lt == null)
+        {
+            if (rt != null && rt.isVoidType())
+                issue(new VoidTypeError(stmt.pos, stmt.id.name));
+            else 
+               
+                stmt.symbol.type = rt;
+        }
+
+        if (lt != null && lt.noError() && (lt.isFuncType() || !rt.subtypeOf(lt))) {
             issue(new IncompatBinOpError(stmt.assignPos, lt.toString(), "=", rt.toString()));
         }
     }

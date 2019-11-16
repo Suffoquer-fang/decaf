@@ -69,5 +69,6 @@ public final class MethodSymbol extends Symbol {
         return modifiers.isStatic();
     }
 
+
     private boolean main = false;
 }
