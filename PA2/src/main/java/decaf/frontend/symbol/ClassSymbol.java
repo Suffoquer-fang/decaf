@@ -76,7 +76,9 @@ public final class ClassSymbol extends Symbol {
 
     @Override
     protected String str() {
-        return "class " + name + parentSymbol.map(classSymbol -> " : " + classSymbol.name).orElse("");
+        var modStr = modifiers != null ? modifiers.toString() : "";
+        if (!modStr.isEmpty()) modStr += " ";
+        return modStr + "class " + name + parentSymbol.map(classSymbol -> " : " + classSymbol.name).orElse("");
     }
 
     private boolean main;

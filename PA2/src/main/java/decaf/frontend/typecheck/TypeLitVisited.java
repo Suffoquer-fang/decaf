@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import decaf.driver.ErrorIssuer;
 import decaf.driver.error.BadArrElementError;
 import decaf.driver.error.ClassNotFoundError;
+import decaf.driver.error.FunTypeArgsVoidError;
 import decaf.frontend.scope.ScopeStack;
 import decaf.frontend.tree.Tree;
 import decaf.frontend.tree.Visitor;
 import decaf.frontend.type.BuiltInType;
 import decaf.frontend.type.FunType;
+import decaf.frontend.type.Type;
 
 /**
  * Infer the types of type literals in the abstract syntax tree.
@@ -65,7 +67,16 @@ public interface TypeLitVisited extends Visitor<ScopeStack>, ErrorIssuer {
 
     @Override
     default void visitTLambda(Tree.TLambda that, ScopeStack ctx) {
-        that.type = new FunType(null, new ArrayList<>());
+        that.returnType.accept(this, ctx);
+        var argTypes = new ArrayList<Type>();
+        for (var param : that.typeList) {
+            param.accept(this, ctx);
+            if(param.type.isVoidType())
+                issue(new FunTypeArgsVoidError(param.pos));
+            else
+                argTypes.add(param.type);
+        }
+        that.type = new FunType(that.returnType.type, argTypes);
     }
 
 }

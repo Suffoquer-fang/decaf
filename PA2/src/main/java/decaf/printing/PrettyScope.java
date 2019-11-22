@@ -1,6 +1,7 @@
 package decaf.printing;
 
 import decaf.frontend.scope.*;
+import decaf.frontend.tree.Tree.Lambda;
 import decaf.lowlevel.log.IndentPrinter;
 
 /**
@@ -46,6 +47,14 @@ public final class PrettyScope extends PrettyPrinter<Scope> {
             if (scope.isEmpty()) printer.println("<empty>");
             else scope.forEach(printer::println);
             localScope.nestedLocalScopes().forEach(this::pretty);
+            printer.decIndent();
+        } else if (scope.isLambdaScope()) {
+            var lambdaScope = (LambdaScope) scope;
+            printer.formatLn("FORMAL SCOPE OF 'lambda%s':", lambdaScope.getOwner().name);
+            printer.incIndent();
+            if (scope.isEmpty()) printer.println("<empty>");
+            else scope.forEach(printer::println);
+            pretty(lambdaScope.nestedLocalScope());
             printer.decIndent();
         }
     }

@@ -1,11 +1,14 @@
 package decaf.frontend.symbol;
 
+import java.util.ArrayList;
+
 import decaf.frontend.scope.ClassScope;
 import decaf.frontend.scope.FormalScope;
-import decaf.frontend.scope.LocalScope;
+import decaf.frontend.scope.LambdaScope;
 import decaf.frontend.tree.Pos;
 import decaf.frontend.tree.Tree;
 import decaf.frontend.type.FunType;
+import decaf.frontend.type.Type;
 
 /**
  * Method symbol, representing a method definition.
@@ -17,15 +20,14 @@ public final class LambdaSymbol extends Symbol {
     /**
      * Associated formal scope of the method parameters.
      */
-    public final FormalScope formalScope;
-    public final LocalScope localScope;
+    public final LambdaScope scope;
+    public ArrayList<Type> ret_types = new ArrayList<>();
 
-    public LambdaSymbol(String name, FunType type, FormalScope formalScope, LocalScope localScope, Pos pos) {
+    public LambdaSymbol(String name, FunType type, LambdaScope scope, Pos pos) {
         super(name, type, pos);
         this.type = type;
-        this.formalScope = formalScope;
-        this.localScope = localScope;
-        formalScope.setOwner(this);
+        this.scope = scope;
+        scope.setOwner(this);
     }
 
     @Override

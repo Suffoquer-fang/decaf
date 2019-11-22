@@ -58,7 +58,6 @@ public class LLParser extends Phase<InputStream, Tree.TopLevel> {
     }
 
     private class Parser extends decaf.frontend.parsing.LLTable {
-        boolean hasError = false;
         @Override
         boolean parse() {
             var sv = parseSymbol(start, new TreeSet<>());
@@ -122,19 +121,18 @@ public class LLParser extends Phase<InputStream, Tree.TopLevel> {
             var result = query(symbol, token);
             // get production by lookahead symbol
 
-
-            var beginA = beginSet(symbol);
-            var endA = followSet(symbol);
-            endA.addAll(follow);
-            if (!beginA.contains(token)) {
-                hasError = true;
+            var Begin = beginSet(symbol);
+            var End = followSet(symbol);
+            End.addAll(follow);
+            if (!Begin.contains(token)) 
+            {
                 yyerror("syntax error");
                 while (true) {
-                    if (beginA.contains(token)) {
+                    if (Begin.contains(token)) {
                         result = query(symbol, token);
                         break;
                     }
-                    else if (endA.contains(token))
+                    else if (End.contains(token))
                         return null;
                     token = nextToken();
                 }
@@ -151,12 +149,12 @@ public class LLParser extends Phase<InputStream, Tree.TopLevel> {
                 var term = right.get(i);
                // System.out.println(params[i]);
                 params[i + 1] = isNonTerminal(term)
-                        ? parseSymbol(term, endA) // for non terminals: recursively parse it
+                        ? parseSymbol(term, End) // for non terminals: recursively parse it
                         : matchToken(term) // for terminals: match token
                 ;
             }
 
-            if (!hasError) act(actionId, params); // do user-defined action
+            if(errors.isEmpty()) act(actionId, params); // do user-defined action
             return params[0];
         }
 

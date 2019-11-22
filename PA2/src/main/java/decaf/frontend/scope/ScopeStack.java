@@ -1,6 +1,7 @@
 package decaf.frontend.scope;
 
 import decaf.frontend.symbol.ClassSymbol;
+import decaf.frontend.symbol.LambdaSymbol;
 import decaf.frontend.symbol.MethodSymbol;
 import decaf.frontend.symbol.Symbol;
 import decaf.frontend.tree.Pos;
@@ -65,10 +66,18 @@ public class ScopeStack {
      *
      * @return method symbol
      */
-    public MethodSymbol currentMethod() {
+    public Symbol currentMethod() {
+        if (!lambdaStack.empty())
+            return lambdaStack.peek();
         Objects.requireNonNull(currMethod);
         return currMethod;
     }
+
+    public MethodSymbol getCurMethod() {
+        Objects.requireNonNull(currMethod);
+        return currMethod;
+    }
+
 
     /**
      * Open a scope.
@@ -89,6 +98,9 @@ public class ScopeStack {
         } else if (scope.isFormalScope()) {
             var formalScope = (FormalScope) scope;
             currMethod = formalScope.getOwner();
+        } else if (scope.isLambdaScope()) {
+            var formalScope = (LambdaScope) scope;
+            lambdaStack.push(formalScope.getOwner());
         }
         scopeStack.push(scope);
     }
@@ -107,8 +119,12 @@ public class ScopeStack {
             while (!scopeStack.isEmpty()) {
                 scopeStack.pop();
             }
+        } else if(scope.isLambdaScope()) {
+            lambdaStack.pop();
         }
     }
+
+    
 
     /**
      * Lookup a symbol by name. By saying "lookup", the user expects that the symbol is found.
@@ -194,6 +210,7 @@ public class ScopeStack {
     private Stack<Scope> scopeStack = new Stack<>();
     private ClassSymbol currClass;
     private MethodSymbol currMethod;
+    private Stack<LambdaSymbol> lambdaStack = new Stack<>();
 
     private Optional<Symbol> findWhile(String key, Predicate<Scope> cond, Predicate<Symbol> validator) {
         ListIterator<Scope> iter = scopeStack.listIterator(scopeStack.size());
